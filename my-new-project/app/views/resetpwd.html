@@ -1,1 +1,21 @@
-<p>This is the resetpwd view.</p>
+<div class="bs-resetpwd" ng-init="user.init()">
+	<form name="resetpwdForm">
+		<h5 class="header-title">修改密码</h5>
+		<div class="form-group">
+		    <label for="exampleInputPassword0">旧密码</label>
+		    <input type="password" class="form-control" name="oldPwd" ng-model="pwdFunc.data.oldpwd" placeholder="旧密码" required/>
+	  	</div>
+		<div class="form-group">
+		    <label for="exampleInputPassword1">新密码</label>
+		    <input type="password" class="form-control" name="newPwd1" ng-model="pwdFunc.data.newpwd1" placeholder="新密码" required/>
+	  	</div>
+	  	<div class="form-group">
+		    <label for="exampleInputPassword2">确认新密码</label>
+		    <input type="password" class="form-control" name="newPwd2" ng-model="pwdFunc.data.newpwd2" placeholder="新密码" ng-change="pwdFunc.checkPwd()" required/>
+		    <small class="error-tips" ng-show="pwdCheckError">新密码不一致</small>
+	  	</div>
+	  	
+	  	<button type="submit" class="btn btn-primary" ng-click="pwdFunc.saveReset()" ng-disabled="resetpwdForm.oldPwd.$error.required || resetpwdForm.newPwd1.$error.required || resetpwdForm.newPwd2.$error.required">保存</button>
+	  	<button type="button" class="btn btn-default" ng-click="pwdFunc.cancel()" >取消</button>
+	</form>
+</div>

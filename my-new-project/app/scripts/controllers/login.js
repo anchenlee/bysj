@@ -42,10 +42,7 @@ angular.module('myNewProjectApp')
                     $scope.data.isLogin = true;
                     $scope.data.userId = _self.data.userId;
                     $scope.data.username = data.item;
-                    notify({
-                        message: data.message,
-                        classes: 'alert-success'
-                    })
+                    $scope.appFunc.cusNotify(data.message, true);
                     $window.location.href = '#/home'
                 }
         	})

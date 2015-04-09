@@ -33,11 +33,15 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
+      .when('/resetpwd', {
+        templateUrl: 'views/resetpwd.html',
+        controller: 'ResetpwdCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
   })
-  .controller('AppCtrl', function($scope, $http) {
+  .controller('AppCtrl', function($scope, $http, notify) {
     $scope.appFunc = {
       init: function() {
         $scope.data = {
@@ -58,7 +62,17 @@ angular
         $http.get('../api/index.php/User/loginOut').success(function(data) {
           if(data.success) {
             $scope.data.isLogin = false;
+            $scope.appFunc.cusNotify(data.message, true);
           }
+        })
+      },
+      cusNotify: function (msg, bool) {
+        console.log(msg)
+        var msgClass;
+        msgClass = bool ? 'alert-success' : 'alert-danger';
+        notify({
+          message: msg,
+          classes: msgClass
         })
       }
     }
