@@ -8,42 +8,46 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
+
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/angular-notify/dist/angular-notify.css">
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="resetpwdApp">
+  <body ng-app="myNewProjectApp" ng-controller="AppCtrl" ng-init="appFunc.init()">
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
     <div class="header">
-      <div class="navbar navbar-default" role="navigation">
-        <div class="container">
-          <div class="navbar-header">
-
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-
-            <a class="navbar-brand" href="#/">resetpwd</a>
-          </div>
-
-          <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#/">Home</a></li>
-              <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
-            </ul>
-          </div>
-        </div>
+      <div class="bs-navbar bs-navbar-default" role="navigation">
+        <img class="logo" src="./images/logo2.png" alt="">
+        <ul class="bs-nav bs-navbar-nav">
+          <li class="active"><a href="#/">首页</a></li>
+          <li><a ng-href="#/about">实验课程</a></li>
+          <li><a ng-href="#/">我的课程</a></li>
+          <li><a ng-href="#/">上传文件</a></li>
+        </ul>
+        <ul class="bs-nav bs-navbar-right" dropdown>
+          <li class="active" ng-show="!data.isLogin"><a href="#/login">登录</a></li>
+          <li class="active dropdown-toggle" dropdown-toggle>
+            <a ng-show="data.isLogin" href="#/">
+              {{data.username}}
+              <span class="caret"></span>
+              <span class="sr-only">Split button!</span>
+            </a>
+          </li>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#/resetpwd">设置</a></li>
+            <li class="divider"></li>
+            <li ng-click="appFunc.loginOut()"><a href="">登出</a></li>
+          </ul>
+        </ul>
       </div>
     </div>
 
@@ -53,7 +57,7 @@
 
     <div class="footer">
       <div class="container">
-        <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
+        <p><span class="glyphicon glyphicon-heart"></span> by anchenLee</p>
       </div>
     </div>
 
@@ -74,10 +78,27 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+        <script src="../bower_components/angular/angular.js"></script>
+        <script src="../bower_components/angular-animate/angular-animate.js"></script>
+        <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+        <script src="../bower_components/angular-mocks/angular-mocks.js"></script>
+        <script src="../bower_components/angular-resource/angular-resource.js"></script>
+        <script src="../bower_components/angular-route/angular-route.js"></script>
+        <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="../bower_components/angular-touch/angular-touch.js"></script>
+        <script src="../bower_components/angular-notify/dist/angular-notify.js"></script>
+        <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+
+        <!-- jquery文件 -->
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <!-- bootstrap 文件 -->
+        <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/filters/myfilter.js"></script>
         <!-- endbuild -->
 </body>
 </html>

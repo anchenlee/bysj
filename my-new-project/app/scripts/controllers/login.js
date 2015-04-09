@@ -28,7 +28,6 @@ angular.module('myNewProjectApp')
     	*/
     	loginFunc: function() {
             var _self = this;
-    		console.log(_self.data);
     		$http({
     		 	method: 'POST',
     		    url: '../api/index.php/User/login',
