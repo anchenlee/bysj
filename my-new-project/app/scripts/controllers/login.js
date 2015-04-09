@@ -16,7 +16,7 @@ angular.module('myNewProjectApp')
     ];
     $scope.user = {
     	data: {
-    		userId:'',
+    		studentId:'',
     		password:'',
     		usertype:''
     	},
@@ -32,18 +32,20 @@ angular.module('myNewProjectApp')
     		 	method: 'POST',
     		    url: '../api/index.php/User/login',
     		    data: $.param({
-    		    	userId: _self.data.userId,
+    		    	studentId: _self.data.studentId,
     		    	password: _self.data.password,
                     usertype: _self.data.usertype
     		    }),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     		}).success(function(data) {
+                console.log(333, data);
                 if(data.success) {
                     $scope.data.isLogin = true;
-                    $scope.data.userId = _self.data.userId;
-                    $scope.data.username = data.item;
+                    $scope.data.studentId = _self.data.studentId;
+                    $scope.data.username = data.item.username;
+                    $scope.data.id = data.item.id;
                     $scope.appFunc.cusNotify(data.message, true);
-                    $window.location.href = '#/home'
+                    $window.location.href = '#/home';
                 }
         	})
     	}

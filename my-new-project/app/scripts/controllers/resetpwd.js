@@ -36,7 +36,10 @@ angular.module('myNewProjectApp')
     			method: 'POST',
     		    url: '../api/index.php/User/resetpwd',
     		    data: $.param({
-    		    	userId: $scope.data.userId
+    		    	id: $scope.data.id,
+    		    	userId: $scope.data.userId,
+    		    	oldpwd: _self.data.oldpwd,
+    		    	newpwd: _self.data.newpwd1
     		    }),
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
     		}).success(function(data) {

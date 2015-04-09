@@ -41,12 +41,13 @@ angular
         redirectTo: '/'
       });
   })
-  .controller('AppCtrl', function($scope, $http, notify) {
+  .controller('AppCtrl', function($scope, $http, notify, $window) {
     $scope.appFunc = {
       init: function() {
         $scope.data = {
           isLogin : false,
-          userId:'', //学号
+          id: '', //用户id
+          studentId:'', //学号
           username:'', //用户名
           password:'', //密码
           usertype:''  //用户角色
@@ -54,6 +55,7 @@ angular
         $http.get('../api/index.php/User/index').success(function(data) {
           if(data.success) {
             $scope.data.isLogin = true;
+            $scope.data.id = data.item.id;
             $scope.data.username = data.item.username;
           }
         })
@@ -63,6 +65,7 @@ angular
           if(data.success) {
             $scope.data.isLogin = false;
             $scope.appFunc.cusNotify(data.message, true);
+            $window.location.href = '#/'
           }
         })
       },
