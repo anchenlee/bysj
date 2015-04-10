@@ -17,7 +17,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'cgNotify',
-    'ui.bootstrap'
+    'ui.bootstrap',
   ])
   .config(function ($routeProvider) {
     $routeProvider

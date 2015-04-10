@@ -2,6 +2,8 @@
 .bs-setting{}
 /* 左侧边栏 */
 .setting-lft{ float: left;width: 200px;margin-right: 20px;height: 400px;}
+.setting-box{width: 100%;background: #5cb85c;margin: 10px 0;height: 60px;text-align: center;cursor: pointer;}
+.setting-box a{color: #fff;font-size: 14px;font-weight: 600;line-height: 60px;}
 .setting-rht{overflow: hidden;}
 /* 修改密码部分 */
 .setting-rht form{width: 400px;margin: 0 auto;padding: 40px;background: #fff;
