@@ -16,6 +16,7 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/setting.css">
     <!-- endbuild -->
   </head>
   <body ng-app="myNewProjectApp" ng-controller="AppCtrl" ng-init="appFunc.init()">
@@ -34,16 +35,16 @@
           <li><a ng-href="#/">上传文件</a></li>
         </ul>
         <ul class="bs-nav bs-navbar-right" dropdown>
-          <li class="active" ng-show="!data.isLogin"><a href="#/login">登录</a></li>
+          <li class="active" ng-show="!adminConfig.isLogin"><a href="#/login">登录</a></li>
           <li class="active dropdown-toggle" dropdown-toggle>
-            <a ng-show="data.isLogin" href="#/">
-              {{data.username}}
+            <a ng-show="adminConfig.isLogin" href="#/">
+              {{adminConfig.username}}
               <span class="caret"></span>
               <span class="sr-only">Split button!</span>
             </a>
           </li>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#/resetpwd">设置</a></li>
+            <li><a href="#/setting">设置</a></li>
             <li class="divider"></li>
             <li ng-click="appFunc.loginOut()"><a href="">登出</a></li>
           </ul>
@@ -98,7 +99,7 @@
         <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/about.js"></script>
         <script src="scripts/controllers/login.js"></script>
-        <script src="scripts/controllers/resetpwd.js"></script>
+        <script src="scripts/controllers/setting.js"></script>
         <script src="scripts/filters/myfilter.js"></script>
         <!-- endbuild -->
 </body>

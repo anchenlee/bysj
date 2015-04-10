@@ -5,7 +5,7 @@
 		/*判断用户是否已经登录 session*/
 		public function index() {
 			if(isset($_SESSION['id'])) {
-				$this->ajaxReturn(array('item'=> array('id' => $_SESSION['id'], 'username'=>$_SESSION['user_name'], 'usertype'=>$_SESSION['usertype']), 'message'=>'已经登录','success'=>true),'JSON');
+				$this->ajaxReturn(array('item'=> array('id' => $_SESSION['id'], 'username'=>$_SESSION['username'], 'usertype'=>$_SESSION['usertype'], 'superAdmin'=>$_SESSION['superAdmin'], 'teamAdmin'=>$_SESSION['teamAdmin']), 'message'=>'已经登录','success'=>true),'JSON');
 			} else {
 				$this->ajaxReturn(array('item'=>'', 'message'=>'未登录','success'=>false),'JSON');
 			}
@@ -15,26 +15,24 @@
 			$user = M('User');
 			$con['studentId'] = $_POST['studentId'];
 			$con['password'] = md5($_POST['password']);
-			$con['usertype'] = $_POST['usertype'];
-			if(isset($con['studentId']) && isset($con['password']) && isset($con['usertype'])){
+			/*$con['usertype'] = $_POST['usertype'];*/
+			if(isset($con['studentId']) && isset($con['password'])){/* && isset($con['usertype']*/
 				$count = count($user->where($con)->select()); 
-
 				if($count == 1) {
-					$username = $user->where($con)->getField('username');
-					$id = $user->where($con)->getField('id');
+					$resule['id'] = $user->where($con)->getField('id');
+					$resule['username'] = $user->where($con)->getField('username');
+					$resule['usertype'] = $user->where($con)->getField('usertype');
+					$resule['superAdmin'] = $user->where($con)->getField('superAdmin');
+					$resule['teamAdmin'] = $user->where($con)->getField('teamAdmin');
 					
-					$_SESSION['id'] = $id;
-					$_SESSION['user_name'] = $username;
-					$_SESSION['user_type'] = $con['usertype'];
-					$this->ajaxReturn(array('item'=>array('id' =>$id, 'username' => $username), 'message'=>'登录成功', 'success'=>true),'JSON');
+					$_SESSION = $resule;
+					$this->ajaxReturn(array('item'=>array('id'=>$resule['id'], 'username'=>$resule['username'], 'usertype'=>$resule['usertype'], 'superAdmin'=>$resule['superAdmin'], 'teamAdmin'=>$resule['teamAdmin']), 'message'=>'登录成功', 'success'=>true),'JSON');
 				} else {
 					$this->ajaxReturn(array('message'=>'帐号不存在','success'=>false),'JSON');
 				}
 			} else {
 				$this->ajaxReturn(array('message'=>'请输入完整的信息','success'=>false),'JSON');
 			}
-			/*$this->ajaxReturn($m);
-			$this->ajaxReturn(array("Peter"=>$username,"Ben"=>"37","Joe"=>"43"), 'JSON');*/
 		}
 		/*登出*/
 		public function loginOut() {
@@ -62,7 +60,7 @@
 		public function resetpwd() {
 			$user = M('User');
 			$con['id'] = $_POST['id'];
-			$con['userId'] = $_POST['userId'];
+			$con['studentId'] = $_POST['studentId'];
 			$con['oldpwd'] = md5($_POST['oldpwd']);
 			$con['newpwd'] = md5($_POST['newpwd']);
 			$Ccon['id'] = $con['id'];

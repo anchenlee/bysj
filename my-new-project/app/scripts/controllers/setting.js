@@ -8,7 +8,7 @@
  * Controller of the myNewProjectApp
  */
 angular.module('myNewProjectApp')
-  .controller('ResetpwdCtrl', function ($scope, $http, $window, notify) {
+  .controller('SettingCtrl', function ($scope, $http, $window, notify) {
     $scope.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
@@ -41,13 +41,12 @@ angular.module('myNewProjectApp')
     	},
     	saveReset: function() {
     		var _self = this;
-    		console.log(_self.data);
     		$http({
     			method: 'POST',
     		    url: '../api/index.php/User/resetpwd',
     		    data: $.param({
-    		    	id: $scope.data.id,
-    		    	studentId: $scope.data.studentId,
+    		    	id: $scope.adminConfig.id,
+    		    	studentId: $scope.adminConfig.studentId,
     		    	oldpwd: _self.data.oldpwd,
     		    	newpwd: _self.data.newpwd1
     		    }),

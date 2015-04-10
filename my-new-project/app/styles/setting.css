@@ -1,0 +1,11 @@
+/* 设置页面 */
+.bs-setting{}
+/* 左侧边栏 */
+.setting-lft{ float: left;width: 200px;margin-right: 20px;height: 400px;}
+.setting-rht{overflow: hidden;}
+/* 修改密码部分 */
+.setting-rht form{width: 400px;margin: 0 auto;padding: 40px;background: #fff;
+	/* border: 1px solid #ccc; */box-shadow: 0 0 2px #ccc;}
+.setting-rht form{ padding-top: 20px;}
+.setting-rht form .header-title{ font-size: 16px;color: #999;font-weight: 600;line-height: 30px;
+	margin-bottom: 20px;border-bottom: 1px dashed #ccc;}

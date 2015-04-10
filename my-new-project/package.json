@@ -1,7 +1,9 @@
 {
   "name": "resetpwd",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "font-awesome": "^4.3.0"
+  },
   "repository": {},
   "devDependencies": {
     "grunt": "^0.4.5",

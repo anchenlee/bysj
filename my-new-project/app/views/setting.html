@@ -1,5 +1,16 @@
-<div class="bs-resetpwd" ng-init="user.init()">
-	<form name="resetpwdForm">
+<div class="bs-setting clearfix" ng-init="user.init()">
+
+	<div class="setting-lft">
+		<div class="setting-box" ><!-- ng-show="!adminConfig.superAdmin" -->
+			<a href="">修改密码</a>
+			<span class="fa fa-gear"></span>
+		</div>
+		<div class="setting-box">添加管理员</div>
+		<div class="setting-box">添加老师</div>
+		<div class="setting-box">添加学生</div>
+	</div>
+	<div class="setting-rht">
+		<form name="resetpwdForm">
 		<h5 class="header-title">修改密码</h5>
 		<div class="form-group">
 		    <label for="exampleInputPassword0">旧密码</label>
@@ -19,4 +30,5 @@
 	  	<button type="submit" class="btn btn-primary" ng-click="pwdFunc.saveReset()" ng-disabled="resetpwdForm.oldPwd.$error.required || resetpwdForm.newPwd1.$error.required || resetpwdForm.newPwd2.$error.required">保存</button>
 	  	<button type="button" class="btn btn-default" ng-click="pwdFunc.cancel()" >取消</button>
 	</form>
+	</div>
 </div>

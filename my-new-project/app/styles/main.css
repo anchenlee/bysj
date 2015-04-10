@@ -98,6 +98,5 @@ body{background: #f7f8fb;}
 
 /* 登录部分 */
 .bs-login{position: relative;}
-.bs-login form, .bs-resetpwd form{width: 400px;margin: 0 auto;padding: 40px;background: #fff;/* border: 1px solid #ccc; */box-shadow: 0 0 2px #ccc;}
-.bs-resetpwd form{ padding-top: 20px;}
-.bs-resetpwd .header-title{ font-size: 16px;color: #999;font-weight: 600;line-height: 30px;margin-bottom: 20px;border-bottom: 1px dashed #ccc;}
+.bs-login form{width: 400px;margin: 0 auto;padding: 40px;background: #fff;/* border: 1px solid #ccc; */
+  box-shadow: 0 0 2px #ccc;}

@@ -33,9 +33,9 @@ angular
         templateUrl: 'views/about.html',
         controller: 'AboutCtrl'
       })
-      .when('/resetpwd', {
-        templateUrl: 'views/resetpwd.html',
-        controller: 'ResetpwdCtrl'
+      .when('/setting', {
+        templateUrl: 'views/setting.html',
+        controller: 'SettingCtrl'
       })
       .otherwise({
         redirectTo: '/'
@@ -44,28 +44,32 @@ angular
   .controller('AppCtrl', function($scope, $http, notify, $window) {
     $scope.appFunc = {
       init: function() {
-        $scope.data = {
+        $scope.adminConfig = {
           isLogin : false,
           id: '', //用户id
           studentId:'', //学号
           username:'', //用户名
           password:'', //密码
-          usertype:''  //用户角色
+          usertype:'',  //用户角色 老师/学生
+          superAdmin: 'false', //用户权限
+          teamAdmin: 'false' //用户权限
         }
         $http.get('../api/index.php/User/index').success(function(data) {
           if(data.success) {
-            $scope.data.isLogin = true;
-            $scope.data.id = data.item.id;
-            $scope.data.username = data.item.username;
-            $scope.data.password = data.item.password;
-            $scope.data.usertype = data.item.usertype;
+            $scope.adminConfig.isLogin = true;
+            $scope.adminConfig.id = data.item.id;
+            $scope.adminConfig.username = data.item.username;
+            $scope.adminConfig.password = data.item.password;
+            $scope.adminConfig.usertype = data.item.usertype;
+            $scope.adminConfig.superAdmin = data.item.superAdmin;
+            $scope.adminConfig.teamAdmin = data.item.teamAdmin;
           }
         })
       },
       loginOut: function() {
         $http.get('../api/index.php/User/loginOut').success(function(data) {
           if(data.success) {
-            $scope.data.isLogin = false;
+            $scope.adminConfig.isLogin = false;
             $scope.appFunc.cusNotify(data.message, true);
             $window.location.href = '#/'
           }
