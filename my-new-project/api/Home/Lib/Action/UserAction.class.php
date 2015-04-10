@@ -4,8 +4,8 @@
 	class UserAction extends Action {
 		/*判断用户是否已经登录 session*/
 		public function index() {
-			if(isset($_SESSION['user_id'])) {
-				$this->ajaxReturn(array('item'=> array('id' => $_SESSION['id'], 'username'=>$_SESSION['user_name']), 'message'=>'已经登录','success'=>true),'JSON');
+			if(isset($_SESSION['id'])) {
+				$this->ajaxReturn(array('item'=> array('id' => $_SESSION['id'], 'username'=>$_SESSION['user_name'], 'usertype'=>$_SESSION['usertype']), 'message'=>'已经登录','success'=>true),'JSON');
 			} else {
 				$this->ajaxReturn(array('item'=>'', 'message'=>'未登录','success'=>false),'JSON');
 			}
@@ -18,12 +18,14 @@
 			$con['usertype'] = $_POST['usertype'];
 			if(isset($con['studentId']) && isset($con['password']) && isset($con['usertype'])){
 				$count = count($user->where($con)->select()); 
+
 				if($count == 1) {
 					$username = $user->where($con)->getField('username');
 					$id = $user->where($con)->getField('id');
-					var_dump($username, $id);
+					
 					$_SESSION['id'] = $id;
 					$_SESSION['user_name'] = $username;
+					$_SESSION['user_type'] = $con['usertype'];
 					$this->ajaxReturn(array('item'=>array('id' =>$id, 'username' => $username), 'message'=>'登录成功', 'success'=>true),'JSON');
 				} else {
 					$this->ajaxReturn(array('message'=>'帐号不存在','success'=>false),'JSON');
@@ -50,16 +52,23 @@
 				$this -> ajaxReturn(array('message'=>'登出成功','success'=>true),'JSON');
 			}
 		}
+		/*验证密码*/
+		/*public function checkOldpwd() {
+			$user = M('User');
+			$con['id'] = $_POST['id'];
+			$con['studentId'] = $_POST['studentId']
+		}*/
 		/*修改密码*/
 		public function resetpwd() {
-			$cuser = M('User');
+			$user = M('User');
 			$con['id'] = $_POST['id'];
 			$con['userId'] = $_POST['userId'];
 			$con['oldpwd'] = md5($_POST['oldpwd']);
 			$con['newpwd'] = md5($_POST['newpwd']);
+			$Ccon['id'] = $con['id'];
 			if(isset($con['id'])) {
 				$data['password'] = $con['newpwd'];
-				$count = count($cuser->where('id=' $con['id'])->save($data));
+				$count = count($user->where($Ccon)->save($data));
 				if($count == 1) {
 					$this -> ajaxReturn(array('message'=>'密码修改成功','success'=>true),'JSON');
 				}

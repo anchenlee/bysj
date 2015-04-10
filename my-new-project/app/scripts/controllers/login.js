@@ -28,6 +28,7 @@ angular.module('myNewProjectApp')
     	*/
     	loginFunc: function() {
             var _self = this;
+            console.log(_self.data);
     		$http({
     		 	method: 'POST',
     		    url: '../api/index.php/User/login',
@@ -43,9 +44,12 @@ angular.module('myNewProjectApp')
                     $scope.data.isLogin = true;
                     $scope.data.studentId = _self.data.studentId;
                     $scope.data.username = data.item.username;
+                    $scope.data.usertype = _self.data.usertype;
                     $scope.data.id = data.item.id;
                     $scope.appFunc.cusNotify(data.message, true);
                     $window.location.href = '#/home';
+                } else {
+                    $scope.appFunc.cusNotify(data.message, false);
                 }
         	})
     	}

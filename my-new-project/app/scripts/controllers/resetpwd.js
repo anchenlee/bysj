@@ -21,6 +21,16 @@ angular.module('myNewProjectApp')
     		newpwd1: '',
     		newpwd2: ''
     	},
+        /*验证原密码*/
+        /*checkOldpwd: function() {
+            var _self = this;
+            if(_self.data.oldpwd != $scope.data.password) {
+                $scope.isPwdError = true;
+            } else {
+                $scope.isPwdError = false;
+            }
+        },*/
+        /*验证两次密码是否相同*/
     	checkPwd: function() {
     		var _self = this;
     		if(_self.data.newpwd1 != _self.data.newpwd2) {
@@ -37,7 +47,7 @@ angular.module('myNewProjectApp')
     		    url: '../api/index.php/User/resetpwd',
     		    data: $.param({
     		    	id: $scope.data.id,
-    		    	userId: $scope.data.userId,
+    		    	studentId: $scope.data.studentId,
     		    	oldpwd: _self.data.oldpwd,
     		    	newpwd: _self.data.newpwd1
     		    }),
@@ -46,10 +56,6 @@ angular.module('myNewProjectApp')
     			console.log(data);
     			if(data.success) {
     				$window.location.href = '#/home';
-    				notify({
-                        message: data.message,
-                        classes: 'alert-success'
-                    })
                     $scope.appFunc.cusNotify(data.message, true);
     			} else {
     				$scope.appFunc.cusNotify(data.message, false);

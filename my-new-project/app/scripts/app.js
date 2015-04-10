@@ -57,6 +57,8 @@ angular
             $scope.data.isLogin = true;
             $scope.data.id = data.item.id;
             $scope.data.username = data.item.username;
+            $scope.data.password = data.item.password;
+            $scope.data.usertype = data.item.usertype;
           }
         })
       },
