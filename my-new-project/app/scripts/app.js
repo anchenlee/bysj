@@ -47,12 +47,12 @@ angular
         $scope.adminConfig = {
           isLogin : false,
           id: '', //用户id
-          studentId:'', //学号
-          username:'', //用户名
-          password:'', //密码
-          usertype:'',  //用户角色 老师/学生
-          superAdmin: 'false', //用户权限
-          teamAdmin: 'false' //用户权限
+          userId: '', //学号
+          username: '', //用户名
+          password: '', //密码
+          usertype: '',  //用户角色 老师/学生
+          superAdmin: '', //用户权限
+          teamAdmin: '' //用户权限
         }
         $http.get('../api/index.php/User/index').success(function(data) {
           if(data.success) {
@@ -61,8 +61,8 @@ angular
             $scope.adminConfig.username = data.item.username;
             $scope.adminConfig.password = data.item.password;
             $scope.adminConfig.usertype = data.item.usertype;
-            $scope.adminConfig.superAdmin = data.item.superAdmin;
-            $scope.adminConfig.teamAdmin = data.item.teamAdmin;
+            $scope.adminConfig.superAdmin = (data.item.superAdmin == '0') ? false : true;
+            $scope.adminConfig.teamAdmin = (data.item.teamAdmin == '0') ? false : true;
           }
         })
       },

@@ -16,7 +16,7 @@ angular.module('myNewProjectApp')
     ];
     $scope.user = {
     	data: {
-    		studentId:'',
+    		userId:'',
     		password:''
     	},
     	init: function() {
@@ -27,12 +27,11 @@ angular.module('myNewProjectApp')
     	*/
     	loginFunc: function() {
             var _self = this;
-            console.log(_self.data);
     		$http({
     		 	method: 'POST',
     		    url: '../api/index.php/User/login',
     		    data: $.param({
-    		    	studentId: _self.data.studentId,
+    		    	userId: _self.data.userId,
     		    	password: _self.data.password/*,
                     usertype: _self.data.usertype*/
     		    }),
@@ -44,6 +43,8 @@ angular.module('myNewProjectApp')
                     $scope.adminConfig.username = data.item.username;
                     $scope.adminConfig.usertype = data.item.usertype;
                     $scope.adminConfig.id = data.item.id;
+                    $scope.adminConfig.superAdmin = (data.item.superAdmin == '0') ? false : true;
+                    $scope.adminConfig.teamAdmin = (data.item.teamAdmin == '0') ? false : true;
                     $scope.appFunc.cusNotify(data.message, true);
                     $window.location.href = '#/home';
                 } else {

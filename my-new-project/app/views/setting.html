@@ -1,92 +1,107 @@
-<div class="bs-setting clearfix" ng-init="user.init()">
+<div class="bs-setting clearfix" ng-init="settingFunc.initSetting()">
 
 	<div class="setting-lft">
-		<div class="setting-box" ng-show="!adminConfig.superAdmin"><!--  -->
+		<div class="setting-box" ng-class="{'sel-active': curShow['resetpwd']}" ng-show="!adminConfig.superAdmin" ng-click="settingFunc.changeShowModel('resetpwd')"><!--  -->
 			<a href="">修改密码</a>
 			<span class="fa fa-gear"></span>
 		</div>
-		<div class="setting-box">
+		<div class="setting-box" ng-class="{'sel-active': curShow['addAdmin']}" ng-show="adminConfig.superAdmin" ng-click="settingFunc.changeShowModel('addAdmin')">
 			<a href="">添加管理员</a>
 			<span class="fa fa-user-plus"></span>
 		</div>
-		<div class="setting-box">
+		<div class="setting-box" ng-class="{'sel-active': curShow['addTeacher']}" ng-show="adminConfig.superAdmin || adminConfig.teamAdmin" ng-click="settingFunc.changeShowModel('addTeacher')">
 			<a href="">添加老师</a>
 			<span class="fa fa-user"></span>
         </div>
-		<div class="setting-box">
+		<div class="setting-box" ng-class="{'sel-active': curShow['addStudent']}" ng-show="adminConfig.superAdmin || adminConfig.teamAdmin" ng-click="settingFunc.changeShowModel('addStudent')">
 			<a href="">添加学生</a>
 			<span class="fa fa-users"></span>
 		</div>
 	</div>
 	<div class="setting-rht">
 		<!-- 修改密码 -->
-		<form name="resetpwdForm">
+		<form name="resetpwdForm" ng-show="curShow['resetpwd']">
 			<h5 class="header-title">修改密码</h5>
 			<div class="form-group">
 			    <label for="exampleInputPassword0">旧密码</label>
-			    <input type="password" class="form-control" name="oldPwd" ng-model="pwdFunc.data.oldpwd" placeholder="旧密码" ng-blur="pwdFunc.checkOldpwd()" required/>
+			    <input type="password" class="form-control" name="oldPwd" ng-model="settingFunc.data.oldpwd" placeholder="旧密码" ng-blur="settingFunc.checkOldpwd()" required/>
 			    <small class="error-tips" ng-show="isPwdError">密码错误</small>
 		  	</div>
 			<div class="form-group">
 			    <label for="exampleInputPassword1">新密码</label>
-			    <input type="password" class="form-control" name="newPwd1" ng-model="pwdFunc.data.newpwd1" placeholder="新密码" required/>
+			    <input type="password" class="form-control" name="newPwd1" ng-model="settingFunc.data.newpwd1" placeholder="新密码" required/>
 		  	</div>
 		  	<div class="form-group">
 			    <label for="exampleInputPassword2">确认新密码</label>
-			    <input type="password" class="form-control" name="newPwd2" ng-model="pwdFunc.data.newpwd2" placeholder="新密码" ng-change="pwdFunc.checkPwd()" required/>
+			    <input type="password" class="form-control" name="newPwd2" ng-model="settingFunc.data.newpwd2" placeholder="新密码" ng-blur="settingFunc.checkPwd()" required/>
 			    <small class="error-tips" ng-show="pwdCheckError">新密码不一致</small>
 		  	</div>
 		  	
-		  	<button type="submit" class="btn btn-primary" ng-click="pwdFunc.saveReset()" ng-disabled="resetpwdForm.oldPwd.$error.required || resetpwdForm.newPwd1.$error.required || resetpwdForm.newPwd2.$error.required">保存</button>
-		  	<button type="button" class="btn btn-default" ng-click="pwdFunc.cancel()" >取消</button>
+		  	<button type="submit" class="btn btn-primary" ng-click="settingFunc.saveReset()" ng-disabled="resetpwdForm.oldPwd.$error.required || resetpwdForm.newPwd1.$error.required || resetpwdForm.newPwd2.$error.required">保存</button>
+		  	<button type="button" class="btn btn-default" ng-click="settingFunc.cancel()" >取消</button>
 		</form>
+
+
+
 		<!-- 添加管理员 -->
-		<form name="resetpwdForm">
+		<form name="addAdminForm" ng-show="curShow['addAdmin']">
 			<h5 class="header-title">添加管理员</h5>
 			<div class="form-group">
 			    <label>账户名</label>
-			    <input type="password" class="form-control" name="oldPwd" ng-model="" placeholder="学号/学工号"  required/>
+			    <input type="text" class="form-control" name="adminId" ng-model="settingFunc.data.adminId" placeholder="学号/学工号"  required/>
 			    <!-- <small class="error-tips" ng-show="isPwdError">密码错误</small> -->
 		  	</div>
 			<div class="form-group">
-			    <label for="exampleInputPassword1">姓名</label>
-			    <input type="password" class="form-control" name="newPwd1" ng-model="" placeholder="姓名" required/>
+			    <label>姓名</label>
+			    <input type="text" class="form-control" name="adminName" ng-model="settingFunc.data.adminName" placeholder="姓名" required/>
 		  	</div>
 		  	
-		  	<button type="submit" class="btn btn-primary" ng-click="pwdFunc.saveTeamAdmin()" ng-disabled="">保存</button>
-		  	<button type="button" class="btn btn-default" ng-click="pwdFunc.cancel()" >取消</button>
+		  	<button type="submit" class="btn btn-primary" ng-click="settingFunc.saveTeamAdmin()" ng-disabled="addAdminForm.adminId.$error.required || addAdminForm.adminId.$error.required">保存</button>
+		  	<button type="button" class="btn btn-default" ng-click="settingFunc.cancel()">取消</button>
 		</form>
+
+
+
 		<!-- 添加老师 -->
-		<form name="resetpwdForm">
+		<form name="addTeacherForm" ng-show="curShow['addTeacher']">
 			<h5 class="header-title">添加老师</h5>
 			<div class="form-group">
 			    <label>学工号</label>
-			    <input type="password" class="form-control" name="oldPwd" ng-model="" placeholder="学号/学工号"  required/>
+			    <input type="text" class="form-control" name="teacherId" ng-model="settingFunc.data.teacherId" placeholder="学工号"  required/>
 			    <!-- <small class="error-tips" ng-show="isPwdError">密码错误</small> -->
 		  	</div>
 			<div class="form-group">
-			    <label for="exampleInputPassword1">姓名</label>
-			    <input type="password" class="form-control" name="newPwd1" ng-model="" placeholder="姓名" required/>
+			    <label>姓名</label>
+			    <input type="password" class="form-control" name="teacherName" ng-model="settingFunc.data.teacherName"  placeholder="姓名" required/>
 		  	</div>
 		  	
-		  	<button type="submit" class="btn btn-primary" ng-click="pwdFunc.saveTeacher()" ng-disabled="">保存</button>
-		  	<button type="button" class="btn btn-default" ng-click="pwdFunc.cancel()" >取消</button>
+		  	<button type="submit" class="btn btn-primary" 
+		  		ng-click="settingFunc.saveTeacher()" 
+		  		ng-disabled="addTeacherForm.teacherId.$error.required || addTeacherForm.teacherName.$error.required">保存
+		  	</button>
+		  	<button type="button" class="btn btn-default" ng-click="settingFunc.cancel()" >取消</button>
 		</form>
+
+
+
 		<!-- 添加学生 -->
-		<form name="resetpwdForm">
+		<form name="addStudentForm" ng-show="curShow['addStudent']">
 			<h5 class="header-title">添加学生</h5>
 			<div class="form-group">
 			    <label>学号</label>
-			    <input type="password" class="form-control" name="oldPwd" ng-model="" placeholder="学号/学工号"  required/>
+			    <input type="password" class="form-control" name="studentId" ng-model="settingFunc.data.studentId"  placeholder="学号"  required/>
 			    <!-- <small class="error-tips" ng-show="isPwdError">密码错误</small> -->
 		  	</div>
 			<div class="form-group">
-			    <label for="exampleInputPassword1">姓名</label>
-			    <input type="password" class="form-control" name="newPwd1" ng-model="" placeholder="姓名" required/>
+			    <label>姓名</label>
+			    <input type="password" class="form-control" name="studentName" ng-model="settingFunc.data.studentName"  placeholder="姓名" required/>
 		  	</div>
 		  	
-		  	<button type="submit" class="btn btn-primary" ng-click="pwdFunc.saveStudent()" ng-disabled="">保存</button>
-		  	<button type="button" class="btn btn-default" ng-click="pwdFunc.cancel()" >取消</button>
+		  	<button type="submit" class="btn btn-primary" 
+		  		ng-click="settingFunc.saveStudent()" 
+		  		ng-disabled="addStudentForm.studentId.$error.required || addStudentForm.studentName.$error.required">保存
+		  	</button>
+		  	<button type="button" class="btn btn-default" ng-click="settingFunc.cancel()" >取消</button>
 		</form>
 	</div>
 </div>
