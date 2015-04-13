@@ -110,6 +110,37 @@ angular.module('myNewProjectApp')
             })
 
         },
+         /* 添加老师  学生*/
+        saveMember: function(type) {
+            var _self = this;
+            var param;
+            if(type) {
+                param = {
+                    userId: _self.data.teacherId,
+                    userName: _self.data.teacherName,
+                    type: type 
+                }
+            } else {
+                param = {
+                    userId: _self.data.studentId,
+                    userName: _self.data.studentName,
+                    type: type 
+                }
+            }
+            $http({
+                method: 'POST',
+                url: '../api/index.php/User/addMenber',
+                data: $.param(param),
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+            }).success(function(data) {
+                if(data.success) {
+                    $window.location.href = '#/home';
+                    $scope.appFunc.cusNotify(data.message, true);
+                } else {
+                    $scope.appFunc.cusNotify(data.message, false);
+                }
+            })
+        },
         /* 取消设置 */
     	cancel: function() {
     		$window.location.href = '#/home';

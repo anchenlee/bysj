@@ -48,19 +48,20 @@ angular
           isLogin : false,
           id: '', //用户id
           userId: '', //学号
-          username: '', //用户名
+          userName: '', //用户名
           password: '', //密码
-          usertype: '',  //用户角色 老师/学生
+          userType: '',  //用户角色 老师/学生
           superAdmin: '', //用户权限
           teamAdmin: '' //用户权限
         }
         $http.get('../api/index.php/User/index').success(function(data) {
           if(data.success) {
+            console.log(data);
             $scope.adminConfig.isLogin = true;
             $scope.adminConfig.id = data.item.id;
-            $scope.adminConfig.username = data.item.username;
+            $scope.adminConfig.userName = data.item.userName;
             $scope.adminConfig.password = data.item.password;
-            $scope.adminConfig.usertype = data.item.usertype;
+            $scope.adminConfig.userType = data.item.userType;
             $scope.adminConfig.superAdmin = (data.item.superAdmin == '0') ? false : true;
             $scope.adminConfig.teamAdmin = (data.item.teamAdmin == '0') ? false : true;
           }

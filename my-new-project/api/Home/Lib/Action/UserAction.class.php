@@ -9,8 +9,8 @@
 					array(
 						'item'=> array(
 							'id' => $_SESSION['id'], 
-							'username'=> $_SESSION['username'], 
-							'usertype'=> $_SESSION['usertype'], 
+							'userName'=> $_SESSION['userName'], 
+							'userType'=> $_SESSION['userType'], 
 							'superAdmin'=> $_SESSION['superAdmin'], 
 							'teamAdmin'=> $_SESSION['teamAdmin']
 						), 
@@ -26,13 +26,13 @@
 			$user = M('User');
 			$con['userId'] = $_POST['userId'];
 			$con['password'] = md5($_POST['password']);
-			/*$con['usertype'] = $_POST['usertype'];*/
-			if(isset($con['userId']) && isset($con['password'])){/* && isset($con['usertype']*/
+			/*$con['userType'] = $_POST['userType'];*/
+			if(isset($con['userId']) && isset($con['password'])){/* && isset($con['userType']*/
 				$count = count($user->where($con)->select()); 
 				if($count == 1) {
 					$resule['id'] = $user->where($con)->getField('id');
-					$resule['username'] = $user->where($con)->getField('username');
-					$resule['usertype'] = $user->where($con)->getField('usertype');
+					$resule['userName'] = $user->where($con)->getField('userName');
+					$resule['userType'] = $user->where($con)->getField('userType');
 					$resule['superAdmin'] = $user->where($con)->getField('superAdmin');
 					$resule['teamAdmin'] = $user->where($con)->getField('teamAdmin');
 					
@@ -41,8 +41,8 @@
 						array(
 							'item'=>array(
 								'id'=>$resule['id'], 
-								'username'=>$resule['username'], 
-								'usertype'=>$resule['usertype'], 
+								'userName'=>$resule['userName'], 
+								'userType'=>$resule['userType'], 
 								'superAdmin'=>$resule['superAdmin'], 
 								'teamAdmin'=>$resule['teamAdmin']
 							), 
@@ -100,7 +100,7 @@
 		public function addAdmin() {
 			$user = M('User');
 			$con['userId'] = $_POST['adminId'];
-			$con['username'] = $_POST['adminName'];
+			$con['userName'] = $_POST['adminName'];
 			if(isset($con['userId']) && count($user->where($con)->select()) == 1) {
 				$data['teamAdmin'] = 1;
 				$count = count($user->where($con)->save($data));
@@ -110,6 +110,32 @@
 					$this -> ajaxReturn(array('message'=>'帐号不存在','success'=>false),'JSON');
 				}
 			} 
+		}
+		/* 添加老师 */
+		public function addMenber() {
+			$user = M('User');
+			$con['userId'] = $_POST['userId'];
+			$con['userName'] = $_POST['userName'];
+			$con['type'] = $_POST['type'];
+			
+			if(isset($con['userId']) && isset($con['userName']) && isset($con['type'])) {
+				$data['userId'] = $con['userId'];
+				$data['userName'] = $con['userName'];
+				$data['superAdmin'] = 0;
+				$data['teamAdmin'] = 0;
+				$data['userType'] = $con['type'];
+				$data['password'] = md5('000000');
+				$count = count($user->add($data));
+				/*var_dump($count);
+				exit;*/
+				if($count == 1) {
+					$this -> ajaxReturn(array('message'=>$con['userName'].'添加成功','success'=>true),'JSON');
+				} else {
+					$this -> ajaxReturn(array('message'=>'添加失败','success'=>false),'JSON');
+				}
+			} else {
+				$this -> ajaxReturn(array('message'=>'数据异常','success'=>false),'JSON');
+			}
 		}
 	}
 ?>

@@ -18,7 +18,7 @@
 			<span class="fa fa-users"></span>
 		</div>
 	</div>
-	<div class="setting-rht">
+	<div class="setting-rht op-form">
 		<!-- 修改密码 -->
 		<form name="resetpwdForm" ng-show="curShow['resetpwd']">
 			<h5 class="header-title">修改密码</h5>
@@ -72,11 +72,11 @@
 		  	</div>
 			<div class="form-group">
 			    <label>姓名</label>
-			    <input type="password" class="form-control" name="teacherName" ng-model="settingFunc.data.teacherName"  placeholder="姓名" required/>
+			    <input type="text" class="form-control" name="teacherName" ng-model="settingFunc.data.teacherName"  placeholder="姓名" required/>
 		  	</div>
 		  	
 		  	<button type="submit" class="btn btn-primary" 
-		  		ng-click="settingFunc.saveTeacher()" 
+		  		ng-click="settingFunc.saveMember(1)" 
 		  		ng-disabled="addTeacherForm.teacherId.$error.required || addTeacherForm.teacherName.$error.required">保存
 		  	</button>
 		  	<button type="button" class="btn btn-default" ng-click="settingFunc.cancel()" >取消</button>
@@ -94,11 +94,11 @@
 		  	</div>
 			<div class="form-group">
 			    <label>姓名</label>
-			    <input type="password" class="form-control" name="studentName" ng-model="settingFunc.data.studentName"  placeholder="姓名" required/>
+			    <input type="text" class="form-control" name="studentName" ng-model="settingFunc.data.studentName"  placeholder="姓名" required/>
 		  	</div>
 		  	
 		  	<button type="submit" class="btn btn-primary" 
-		  		ng-click="settingFunc.saveStudent()" 
+		  		ng-click="settingFunc.saveMember(2)" 
 		  		ng-disabled="addStudentForm.studentId.$error.required || addStudentForm.studentName.$error.required">保存
 		  	</button>
 		  	<button type="button" class="btn btn-default" ng-click="settingFunc.cancel()" >取消</button>

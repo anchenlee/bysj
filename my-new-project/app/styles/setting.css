@@ -10,5 +10,6 @@
 .setting-rht form{width: 400px;margin: 0 auto;padding: 40px;background: #fff;
 	/* border: 1px solid #ccc; */box-shadow: 0 0 2px #ccc;}
 .setting-rht form{ padding-top: 20px;}
-.setting-rht form .header-title{ font-size: 16px;color: #999;font-weight: 600;line-height: 30px;
+.op-form form .header-title{ font-size: 16px;color: #999;font-weight: 600;line-height: 30px;
 	margin-bottom: 20px;border-bottom: 1px dashed #ccc;}
+.op-form .header-title span{font-size: 12px;font-weight: 500;color: #aaf;}
