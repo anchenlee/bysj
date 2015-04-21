@@ -3,6 +3,7 @@
 /* 左侧边栏 */
 .setting-lft{ float: left;width: 200px;margin-right: 20px;height: 400px;}
 .setting-box{width: 100%;background: rgba(41, 208, 155, .6);margin: 10px 0;height: 60px;text-align: center;cursor: pointer;border-radius: 2px;}
+.setting-box .fa{font-size: 20px;color: #f1f2f3;}
 .setting-box a{color: #fff;font-size: 16px;font-weight: 600;line-height: 60px;}
 .setting-box.sel-active{background: rgba(41, 208, 155, 1)}
 .setting-rht{overflow: hidden;}

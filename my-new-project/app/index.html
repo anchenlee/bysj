@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js">
   <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
@@ -9,6 +9,7 @@
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
 
+    <link rel="stylesheet" href="../bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../bower_components/angular-notify/dist/angular-notify.css">
     <!-- endbower -->
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="styles/base.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/setting.css">
+    <link rel="stylesheet" href="styles/uploadlab.css">
     <!-- endbuild -->
   </head>
   <body ng-app="myNewProjectApp" ng-controller="AppCtrl" ng-init="appFunc.init()">
@@ -33,6 +35,7 @@
           <li><a ng-href="#/about">实验课程</a></li>
           <li><a ng-href="#/">我的课程</a></li>
           <li><a ng-href="#/">上传文件</a></li>
+          <li><a ng-show="adminConfig.userType == 1" ng-href="#/uploadlab">上传课程</a></li>
         </ul>
         <ul class="bs-nav bs-navbar-right" dropdown>
           <li class="active" ng-show="!adminConfig.isLogin"><a href="#/login">登录</a></li>
@@ -88,6 +91,9 @@
         <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
         <script src="../bower_components/angular-touch/angular-touch.js"></script>
         <script src="../bower_components/angular-notify/dist/angular-notify.js"></script>
+        <!-- angular上传文件 -->
+        <script src="../bower_components/angular-file-upload/angular-file-upload.js"></script>
+
 
         <!-- jquery文件 -->
         <script src="../bower_components/jquery/dist/jquery.js"></script>
@@ -101,6 +107,7 @@
         <script src="scripts/controllers/login.js"></script>
         <script src="scripts/controllers/setting.js"></script>
         <script src="scripts/filters/myfilter.js"></script>
+        <script src="scripts/controllers/uploadlab.js"></script>
         <!-- endbuild -->
 </body>
 </html>

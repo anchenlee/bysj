@@ -1,0 +1,20 @@
+<div class="upload-lab">
+	<h5>添加课程</h5>
+	<form>
+		<div class="form-group">
+			<label>课程名</label>
+			<input type="text" class="form-control" ng-model="uploadFunc.data.labName" placeholder="输入课程名">
+		</div>
+		<div class="form-group">
+			<label>课程介绍</label>
+			<textarea type="text" class="form-control" ng-model="uploadFunc.data.labIntro" placeholder="输入课程介绍"></textarea>
+		</div>
+		<div class="form-group">
+			<label for="exampleInputFile">上传课件</label>
+			<input type="file" nv-file-select uploader="uploader">
+			<!-- <button class="btn btn-success">上传课件</button> -->
+			<p class="help-block"></p>
+		</div>
+		<button type="submit" class="btn btn-primary" ng-click="uploadFunc.saveCourse()">保存</button>
+	</form>
+</div>

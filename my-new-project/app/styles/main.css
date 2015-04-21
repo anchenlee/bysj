@@ -99,4 +99,12 @@ body{background: #f7f8fb;}
 /* 登录部分 */
 .bs-login{position: relative;}
 .bs-login form{width: 400px;margin: 0 auto;padding: 40px;background: #fff;/* border: 1px solid #ccc; */
-  box-shadow: 0 0 2px #ccc;}
+    box-shadow: 0 0 2px #ccc;}
+
+/* 首页课程展示 */
+.course-ul{font-size: 0;}
+.course-ul li{ width: 208px;height: auto;display: inline-block; vertical-align: top;margin: 10px;
+    background: #fff;font-size: 14px;box-shadow: 0 0 3px #ccc;}
+.course-ul .course-title{ font-size: 14px;font-weight: 600;line-height: 30px;margin-left: 10px;}
+.course-ul .course-poster{ width: 100%;height: 200px;display: block;margin: 0 auto;padding: 3px;}
+.course-ul .course-info{ height: 30px;line-height: 30px;border-top: 1px solid #f3f3f3;margin-left: 10px;}

@@ -18,6 +18,7 @@ angular
     'ngTouch',
     'cgNotify',
     'ui.bootstrap',
+    'angularFileUpload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -36,6 +37,10 @@ angular
       .when('/setting', {
         templateUrl: 'views/setting.html',
         controller: 'SettingCtrl'
+      })
+      .when('/uploadlab', {
+        templateUrl: 'views/uploadlab.html',
+        controller: 'UploadlabCtrl'
       })
       .otherwise({
         redirectTo: '/'

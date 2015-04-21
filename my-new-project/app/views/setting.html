@@ -2,20 +2,20 @@
 
 	<div class="setting-lft">
 		<div class="setting-box" ng-class="{'sel-active': curShow['resetpwd']}" ng-show="!adminConfig.superAdmin" ng-click="settingFunc.changeShowModel('resetpwd')"><!--  -->
-			<a href="">修改密码</a>
 			<span class="fa fa-gear"></span>
+			<a href="">修改密码</a>
 		</div>
 		<div class="setting-box" ng-class="{'sel-active': curShow['addAdmin']}" ng-show="adminConfig.superAdmin" ng-click="settingFunc.changeShowModel('addAdmin')">
-			<a href="">添加管理员</a>
 			<span class="fa fa-user-plus"></span>
+			<a href="">添加管理员</a>
 		</div>
 		<div class="setting-box" ng-class="{'sel-active': curShow['addTeacher']}" ng-show="adminConfig.superAdmin || adminConfig.teamAdmin" ng-click="settingFunc.changeShowModel('addTeacher')">
-			<a href="">添加老师</a>
 			<span class="fa fa-user"></span>
+			<a href="">添加老师</a>
         </div>
 		<div class="setting-box" ng-class="{'sel-active': curShow['addStudent']}" ng-show="adminConfig.superAdmin || adminConfig.teamAdmin" ng-click="settingFunc.changeShowModel('addStudent')">
-			<a href="">添加学生</a>
 			<span class="fa fa-users"></span>
+			<a href="">添加学生</a>
 		</div>
 	</div>
 	<div class="setting-rht op-form">
