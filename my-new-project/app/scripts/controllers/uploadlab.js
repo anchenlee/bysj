@@ -36,7 +36,7 @@ angular.module('myNewProjectApp')
 				}),
 				headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 			}).success(function(data) {
-
+                
 			})
     	}
     }

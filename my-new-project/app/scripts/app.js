@@ -21,6 +21,8 @@ angular
     'angularFileUpload'
   ])
   .config(function ($routeProvider) {
+    console.log(111, $routeProvider);/*
+    console.log(222, $routeParams);*/
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -41,6 +43,10 @@ angular
       .when('/uploadlab', {
         templateUrl: 'views/uploadlab.html',
         controller: 'UploadlabCtrl'
+      })
+      .when('/course/:courseId', {
+        templateUrl: 'views/course.html',
+        controller: 'CourseCtrl'
       })
       .otherwise({
         redirectTo: '/'

@@ -10,13 +10,12 @@
 <div class="row marketing" ng-init="mainFunc.init()">
   <ul class="course-ul">
     <li class="course-list" ng-repeat="cList in courseLists">
-      <img class="course-poster" ng-src="{{ cList.lab_poster }}" alt="">
-      <h5 class="course-title">{{ cList.lab_name }}</h5>
+      <img class="course-poster" ng-src="{{ cList.lab_url }}" alt="">
+      <h5 class="course-title"><a href="#/course/{{ cList.lab_id }}">{{ cList.lab_name }}</a></h5>
       <div class="course-info">
-        <span>{{ cList.createTime }}</span>
+        <span>{{ cList.createTime | date: "yyyy-MM-dd" }}</span>
         <span>{{ cList.uploader }}</span>
       </div>
     </li>
   </ul>
- 
 </div>
