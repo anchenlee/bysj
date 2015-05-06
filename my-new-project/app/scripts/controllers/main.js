@@ -35,7 +35,6 @@ angular.module('myNewProjectApp')
         searchFunc: function() {
             var _self = this;
             if(_self.data.keyword) {
-                console.log(111, _self.data.keyword);
                 $http.get('../api/index.php/Course/getCourse?keyword='+ _self.data.keyword)
                     .success(function(data) {
                         console.log(data);
@@ -43,6 +42,13 @@ angular.module('myNewProjectApp')
                             $scope.courseLists = data.item;
                         }
                     })
+            }
+        },
+        /* 按键盘搜索 */
+        keyPress: function(e) {
+            var _self = this;
+            if(e.keyCode == 13) {
+                _self.searchFunc();
             }
         }
     }

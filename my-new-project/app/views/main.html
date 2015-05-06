@@ -15,8 +15,9 @@
     </div>
     <div class="top-filter search">
       <div class="input-group lf-search">
-        <input type="text" class="form-control" placeholder="输入关键字或老师姓名">
-        <div class="input-group-addon lf-search-btn">搜索</div>
+        <input type="text" class="form-control" ng-model="mainFunc.data.keyword" 
+          ng-keyup="mainFunc.keyPress($event)" placeholder="输入关键字或老师姓名">
+        <div class="input-group-addon lf-search-btn" ng-click="mainFunc.searchFunc()">搜索</div>
       </div>
     </div>
   </div>
