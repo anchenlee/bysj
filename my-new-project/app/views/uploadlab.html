@@ -1,13 +1,14 @@
-<div class="upload-lab">
-	<h5>添加课程</h5>
-	<form>
+<div class="upload-lab" ng-init= "uploadFunc.initFunc()">
+	<h5 ng-show="!hasAddLab">添加课程</h5>
+	<h5 ng-show="hasAddLab">添加课程考核</h5>
+	<form ng-show="!hasAddLab">
 		<div class="form-group">
 			<label>课程名</label>
 			<input type="text" class="form-control" ng-model="uploadFunc.data.labName" placeholder="输入课程名">
 		</div>
 		<div class="form-group">
 			<label>课程介绍</label>
-			<textarea type="text" class="form-control" ng-model="uploadFunc.data.labIntro" placeholder="输入课程介绍"></textarea>
+			<textarea type="text" class="form-control" rows="4" ng-model="uploadFunc.data.labIntro" placeholder="输入课程介绍"></textarea>
 		</div>
 		<div class="form-group">
 			<label for="exampleInputFile">上传课件</label>
@@ -15,6 +16,29 @@
 			<!-- <button class="btn btn-success">上传课件</button> -->
 			<p class="help-block"></p>
 		</div>
-		<button type="submit" class="btn btn-primary" ng-click="uploadFunc.saveCourse()">保存</button>
+		<button type="submit" class="btn btn-primary" ng-click="hasAddLab = true">下一步</button>
+		<!-- ng-click="uploadFunc.saveCourse()" -->
+	</form>
+
+    <!-- 添加课程考核 -->
+	<form ng-show="hasAddLab">
+		<div class="form-group">
+			<label>考核类型</label>
+			<select class="form-control"
+					ng-options="tt.name for tt in testTypes"
+					ng-model="uploadFunc.data.testType"
+
+					ng-init="uploadFunc.data.testType = testTypes[0]"
+					ng-change="uploadFunc.checkType()">
+			</select>
+		</div>
+		<div class="form-group" ng-show="!isTestOnline">
+			<label>考核要求</label>
+			<textarea type="text" class="form-control" rows="4" ng-model="uploadFunc.data.require" placeholder="输入课程要求"></textarea>
+		</div>
+		<button class="btn btn-primary" ng-click="uploadFunc.saveCourse(1)">保存</button> 
+		<button class="btn btn-default" ng-click="uploadFunc.saveCourse(0)">没有考核,跳过</button>
+		<button class="btn btn-sm btn-success c-back" ng-click="hasAddLab = false">返回</button>
+
 	</form>
 </div>

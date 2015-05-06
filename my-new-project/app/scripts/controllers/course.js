@@ -20,7 +20,6 @@ angular.module('myNewProjectApp')
 	    	initFunc: function() {
 	    		var _self = this;
 	    		_self.getCourseInfo(); //初始化课程内容
-
 	    	},
 	    	/* 获取该课程内容 */
 	    	getCourseInfo: function() {

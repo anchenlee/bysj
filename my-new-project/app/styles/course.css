@@ -1,3 +1,12 @@
 .course-module{ }
-.course-lft{ float: left;width: 600px;margin-right: 30px;height: 400px;background: #666;}
+.course-lft{ float: left;width: 600px;margin-right: 30px;height: 400px;/* background: #666; */
+	box-shadow: 0 0 3px #ccc;padding: 20px;}
 .course-rht{ overflow: hidden;}
+.c-title{ font-size: 28px;color: #3e3e3e;line-height: 34px;margin-bottom: 30px;}
+.course-rht .course-info{ margin: 10px 0;}
+.course-rht .c-info-title{ width: 70px;margin-right: 10px;color: #999;}
+.course-rht .c-info-con{ color: #666;font-size: 12px;line-height: 20px;}
+.course-rht .collect{ color: #f44646;font-size: 24px;line-height: 1.5;cursor: pointer;}
+/* 目录列表 */
+.course-dir{ padding: 10px; margin-top: 20px;/* background: #fff;border: 1px solid #e5e5e5; */}
+.course-dir .course-li{ font-size: 16px;color: #666;line-height: 20px;background: rgba(151, 218, 215, .9);padding: 10px;margin: 5px 0;cursor: pointer;}

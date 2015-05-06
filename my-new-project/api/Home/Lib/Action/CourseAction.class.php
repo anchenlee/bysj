@@ -2,8 +2,9 @@
 	class CourseAction extends Action{
 		public function getCourse() {
 			$course = M('Labs');
-			$con['lab_id'] = $_GET['id'];
-			if(isset($con['lab_id'])) {
+			$con['id'] = $_GET['id'];
+			$con['keyword'] = $_GET['keyword'];
+			if(isset($con['id'])) {
 				$result = $course->where($con)->select();
 				$count = count($course->where($con)->select());
 				if($count == 1) {
@@ -14,16 +15,32 @@
 							'success'=>true
 						)
 					);
+				} 
+			}
+
+			if(isset($con['keyword'])) {
+				$data['uploader']=$con['keyword'];
+				$map['lab_name'] = array('like',$con['keyword'].'%');
+				if(is_array($course->where($data)->select())) {
+					$a = $course->where($data)->select();
 				} else {
-					$this->ajaxReturn(
-						array(
-							'item'=>'',
-							'message'=>'没有该课程',
-							'success'=>false
-						)
-					);
+					$a = array($course->where($data)->select());
 				}
-			} else {
+				if(is_array($course->where($map)->select())) {
+					$b = $course->where($map)->select();
+				} else {
+					$b = array($course->where($map)->select());
+				}
+				
+				$this->ajaxReturn(
+					array(
+						'item'=> array_filter(array_merge($a, $b)), 
+						'message'=>'搜索',
+						'success'=>true
+					)
+				);
+			} 
+			if(!isset($con['keyword']) && !isset($con['id'])){
 				$this->ajaxReturn(
 					array(
 						'item'=>$course->select(),
@@ -31,28 +48,41 @@
 						'success'=>true
 					)
 				);
+				
 			}
 		}
 		public function addCourse() {
 			$course = M('Labs');
 			/* 获取课程数据 */
-			$con['lab_id'] = rand(1000,9999);
 			$con['lab_name'] = $_POST['labName'];
 			$con['lab_intro'] = $_POST['labIntro'];
 			$con['lab_url'] = $_POST['labFile']['file_url'];
 			$con['size'] = $_POST['labFile']['size'];
 			$con['createTime'] = time();
 			$con['uploader'] = $_POST['uploader'];
+			$con['testtype'] = $_POST['testType'];
 			if($con) {
 				$count = count($course->add($con));
 				if($count == 1) {
-					$this->ajaxReturn(
-						array(
-							'item'=>'',
-							'message'=>'添加成功',
-							'success'=>true
-						)
-					);
+					if(isset($con['testtype'])) {
+						$courseId = $course->where($con)->getField('id');
+						$this->ajaxReturn(
+							array(
+								'item'=>$courseId,
+								'message'=>'添加成功',
+								'success'=>true
+							)
+						);
+					} else {
+						$this->ajaxReturn(
+							array(
+								'item'=>'',
+								'message'=>'添加成功',
+								'success'=>true
+							)
+						);
+					}
+					
 				} else {
 					$this->ajaxReturn(
 						array(
@@ -67,6 +97,29 @@
 					array(
 						'item'=>'',
 						'message'=>'课程信息不完整',
+						'success'=>false
+					)
+				);
+			}
+		}
+		public function addRequire() {
+			$require = M('Require');
+			$con['require'] = $_POST['require'];
+			$con['courseId'] = $_POST['courseId'];
+			$count = count($require->add($con));
+			if($count==1) {
+				$this->ajaxReturn(
+					array(
+						'item'=>'',
+						'message'=>'课程要求添加成功',
+						'success'=>true
+					)
+				);
+			} else {
+				$this->ajaxReturn(
+					array(
+						'item'=>'',
+						'message'=>'课程要求添加失败',
 						'success'=>false
 					)
 				);

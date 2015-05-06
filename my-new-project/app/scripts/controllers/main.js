@@ -16,7 +16,9 @@ angular.module('myNewProjectApp')
     ];
 
     $scope.mainFunc = {
-    	data: '',
+    	data: {
+            keyword: ''
+        },
     	init: function() {
     		var _self = this;
     		_self.getCourse();
@@ -27,8 +29,21 @@ angular.module('myNewProjectApp')
     			if(data.success) {
     				$scope.courseLists = data.item;
     			}
-    			
     		})
-    	}
+    	},
+        /* 关键字搜索 */
+        searchFunc: function() {
+            var _self = this;
+            if(_self.data.keyword) {
+                console.log(111, _self.data.keyword);
+                $http.get('../api/index.php/Course/getCourse?keyword='+ _self.data.keyword)
+                    .success(function(data) {
+                        console.log(data);
+                        if(data.success) {
+                            $scope.courseLists = data.item;
+                        }
+                    })
+            }
+        }
     }
-  });
+    });

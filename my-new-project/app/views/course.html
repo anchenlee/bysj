@@ -1,11 +1,52 @@
 <div class="course-module" ng-init="learnFunc.initFunc()">
-	<div class="course-view">
+	<div class="course-view clearfix">
 		<div class="course-lft">
 			
 		</div>
 		<div class="course-rht">
-			<h5>{{ learnFunc.data.lab_name }}</h5>
-			<div class="course-info">课程简介：<span>{{ learnFunc.data.lab_intro }}</span></div>
+			<h5 class="c-title">{{ learnFunc.data.lab_name }}</h5>
+			<div class="course-info clearfix">
+				<div class="item-lft c-info-title">课程简介：</div>
+				<div class="item-rht c-info-con" ng-show="learnFunc.data.lab_intro">{{ learnFunc.data.lab_intro }}</div>
+				<div class="item-rht c-info-con" ng-show="!learnFunc.data.lab_intro">老师很懒，什么都没写</div>
+			</div>
+			<div class="course-info clearfix">
+				<div class="item-lft c-info-title">课程老师：</div>
+				<div class="item-rht c-info-con">{{ learnFunc.data.uploader }}</div>
+			</div>
+			<div class="collect" ng-click="hasCollect = true" title="收藏该课程">
+				<i class="fa" ng-class=" {'fa-heart-o': !hasCollect, 'fa-heart': hasCollect}"></i>
+			</div>
+			<div class="course-info clearfix">
+				<div class="item-lft c-info-title">课程要求：</div>
+				<div class="item-rht c-info-con">
+					<a href="#/test/{{ learnFunc.data.id }}">
+						<button class="btn btn-sm btn-primary">开始考核</button>
+					</a>
+				</div>
+			</div>
+			
 		</div>
+	</div>
+	<!-- 该门课其他目录 和评论-->
+	<div class="course-dir">
+		<h5 class="c-title">相关课程</h5>
+		<ul>
+			<li class="course-li">
+				<a href="">数据结构 第1章</a>
+			</li>
+			<li class="course-li">
+				<a href="">数据结构 第2章</a>
+			</li>
+			<li class="course-li">
+				<a href="">数据结构 第3章</a>
+			</li>
+			<li class="course-li">
+				<a href="">数据结构 第4章</a>
+			</li>
+			<li class="course-li">
+				<a href="">数据结构 第5章</a>
+			</li>
+		</ul>
 	</div>
 </div>

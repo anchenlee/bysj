@@ -1,0 +1,26 @@
+数据库
+
+
+
+用户管理表
+学号 id 
+姓名 username
+密码 password
+
+
+通知公告
+编号	 notice_id
+公告内容 notice_content
+发布者   notice_author
+公告时间 notice_time
+
+时事政治
+编号	 news_id
+新闻内容 news_content
+新闻作者 news_author
+发布时间 news_time
+
+资料下载
+编号     date_id
+资料名称 date_name
+上传时间 time
