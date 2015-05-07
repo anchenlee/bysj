@@ -4,6 +4,7 @@
 			$course = M('Labs');
 			$con['id'] = $_GET['id'];
 			$con['keyword'] = $_GET['keyword'];
+			$con['ctype'] = $_GET['ctype'];
 			if(isset($con['id'])) {
 				$result = $course->where($con)->select();
 				$count = count($course->where($con)->select());
@@ -20,7 +21,7 @@
 
 			if(isset($con['keyword'])) {
 				$data['uploader']=$con['keyword'];
-				$map['lab_name'] = array('like',$con['keyword'].'%');
+				$map['lab_name'] = array('like', '%'.$con['keyword'].'%');
 				if(is_array($course->where($data)->select())) {
 					$a = $course->where($data)->select();
 				} else {
@@ -39,8 +40,19 @@
 						'success'=>true
 					)
 				);
-			} 
-			if(!isset($con['keyword']) && !isset($con['id'])){
+			}
+            if(isset($con['ctype'])) {
+            	$data['ctype'] = $con['ctype'];
+                $result = $course->where($data)->select();
+                $this->ajaxReturn(
+                    array(
+                        'item'=>$result,
+                        'message'=>'类型',
+                        'success'=>true
+                    )
+                );
+            }
+            if(!isset($con['keyword']) && !isset($con['id']) && !isset($con['ctype'])){
 				$this->ajaxReturn(
 					array(
 						'item'=>$course->select(),
@@ -58,10 +70,21 @@
 			$con['lab_intro'] = $_POST['labIntro'];
 			$con['lab_url'] = $_POST['labFile']['file_url'];
 			$con['size'] = $_POST['labFile']['size'];
-			$con['createTime'] = time();
+			$con['ctype'] = $_POST['ctype'];
+			$con['createTime'] = mktime();
 			$con['uploader'] = $_POST['uploader'];
 			$con['testtype'] = $_POST['testType'];
-			if($con) {
+
+			if($con['ctype'] == 1) {
+				$con['cposter'] = './images/c++.jpg';
+			}
+			if($con['ctype'] == 2) {
+				$con['cposter'] = './images/vb.jpg';
+			}
+			if($con['ctype'] == 3) {
+				$con['cposter'] = './images/sql.jpg';
+			}
+			if($con) { 
 				$count = count($course->add($con));
 				if($count == 1) {
 					if(isset($con['testtype'])) {

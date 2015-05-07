@@ -17,16 +17,20 @@ angular.module('myNewProjectApp')
 
     $scope.mainFunc = {
     	data: {
-            keyword: ''
+            keyword: '',
+            isSelected: []
         },
     	init: function() {
     		var _self = this;
     		_self.getCourse();
+            _self.data.isSelected[0] = true;
     	},
     	getCourse: function() {
+            var _self = this;
     		$http.get('../api/index.php/Course/getCourse')
     		.success(function(data) {
     			if(data.success) {
+                    _self.data.isSelected[0] = true;
     				$scope.courseLists = data.item;
     			}
     		})
@@ -50,6 +54,22 @@ angular.module('myNewProjectApp')
             if(e.keyCode == 13) {
                 _self.searchFunc();
             }
+        },
+        /*根据类型筛选*/
+        courseType: function(o) {
+            var _self = this;
+            _self.data.isSelected = [];
+            if(!o) {
+                _self.getCourse();
+            } else {
+                $http.get('../api/index.php/Course/getCourse?ctype='+ o)
+                    .success(function(data) {
+                        if(data.success) {
+                            _self.data.isSelected[o] = true;
+                            $scope.courseLists = data.item;
+                        }
+                    })
+                }
         }
     }
     });

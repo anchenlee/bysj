@@ -9,9 +9,14 @@
 <div class="row marketing" ng-init="mainFunc.init()">
   <div class="list-by">
     <div class="top-filter">
-      排序：
-      <mark class="lf-blue ">按时间</mark>
-      <mark class="lf-blue">按人气</mark>
+      <mark  ng-click="mainFunc.courseType(0)" 
+        ng-class="{'lf-blue': mainFunc.data.isSelected[0], 'lf-blue-o': !mainFunc.data.isSelected[0]}">全部</mark>
+      <mark ng-click="mainFunc.courseType(1)"
+        ng-class="{'lf-blue': mainFunc.data.isSelected[1], 'lf-blue-o': !mainFunc.data.isSelected[1]}">C++</mark>
+      <mark class="lf-blue-o" ng-click="mainFunc.courseType(2)"
+        ng-class="{'lf-blue': mainFunc.data.isSelected[2], 'lf-blue-o': !mainFunc.data.isSelected[2]}">Visual Basic</mark>
+      <mark class="lf-blue-o" ng-click="mainFunc.courseType(3)"
+        ng-class="{'lf-blue': mainFunc.data.isSelected[3], 'lf-blue-o': !mainFunc.data.isSelected[3]}">数据库</mark>
     </div>
     <div class="top-filter search">
       <div class="input-group lf-search">
@@ -23,7 +28,7 @@
   </div>
   <ul class="course-ul">
     <li class="course-list" ng-repeat="cList in courseLists">
-      <img class="course-poster" ng-src="{{ cList.lab_url }}" alt="">
+      <img class="course-poster" ng-src="{{ cList.cposter }}" alt="">
       <h5 class="course-title"><a href="#/course/{{ cList.id }}">{{ cList.lab_name }}</a></h5>
       <div class="course-info">
         <span>{{ cList.createTime | date: "yyyy-MM-dd" }}</span>

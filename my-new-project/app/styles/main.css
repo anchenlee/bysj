@@ -114,9 +114,10 @@ body{background: #f7f8fb;}
 .course-ul .course-info{ height: 30px;line-height: 30px;border-top: 1px solid #f3f3f3;margin-left: 10px;}
 /*各种颜色*/
 .lf-blue{ background: rgba(41, 208, 155, 1)}
+.lf-blue-o{ background: rgba(41, 208, 155, .6)}
 .list-by{ margin: 0 20px 20px 10px;height: 50px;position: relative;line-height: 50px;}
 .top-filter{ display: inline-block;vertical-align: middle; margin-right: 40px;}
-.top-filter mark{padding: 5px;cursor: pointer;color: #fff;border-radius: 2px;}
+.top-filter mark{padding: 5px 8px;cursor: pointer;color: #fff;border-radius: 2px;}
 .top-filter.search{ position: absolute;right: 0;}
 .top-filter.search .lf-search{ width: 300px;}
 .lf-search-btn{ cursor: pointer;background: rgba(41, 208, 155, 1);color: #fff;}

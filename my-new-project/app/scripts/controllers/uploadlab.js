@@ -19,7 +19,8 @@ angular.module('myNewProjectApp')
     		labName: '',
     		labIntro: '',
             testType: '',
-            require: ''
+            require: '',
+            ctype: ''
     	},
     	initFunc: function() {
             $scope.hasAddLab = false;
@@ -39,6 +40,7 @@ angular.module('myNewProjectApp')
     	/* 保存上传课程 */
     	saveCourse: function(bool) {
     		var _self = this;
+            console.log(111, _self.data.ctype);
             if(bool) {
                 $http({
                     method: 'POST',
@@ -48,7 +50,8 @@ angular.module('myNewProjectApp')
                         labIntro: _self.data.labIntro,
                         labFile: $scope.cfile,
                         uploader: $scope.adminConfig.userName,
-                        testType: _self.data.testType.value
+                        testType: _self.data.testType.value,
+                        ctype: _self.data.ctype
                     }),
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 }).success(function(data) {
