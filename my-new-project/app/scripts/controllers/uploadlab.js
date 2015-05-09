@@ -19,6 +19,7 @@ angular.module('myNewProjectApp')
     		labName: '',
     		labIntro: '',
             testType: '',
+            questionType: '',
             require: '',
             ctype: ''
     	},
@@ -27,20 +28,28 @@ angular.module('myNewProjectApp')
             $scope.isTestOnline = false;
             $scope.testTypes = [
                 { name: '课后作业', value: 0 },
-                { name: '在线测试', value: 1 }
+                { name: '模块测试', value: 1 }
+            ];
+            $scope.questionTypes = [
+                { name: '单选', value: 0 },
+                { name: '多选', value: 1 },
+                { name: '判断', value: 2 }
             ];
         },
 
         /* 监控考核类型 */
-        checkType: function() {
+        checkTestType: function() {
             var _self = this;
             $scope.isTestOnline = _self.data.testType.value? true: false;
+        },
+        /* 判断试题类型 */
+        checkQuestionType: function() {
+            var _self = this;
         },
     	
     	/* 保存上传课程 */
     	saveCourse: function(bool) {
     		var _self = this;
-            console.log(111, _self.data.ctype);
             if(bool) {
                 $http({
                     method: 'POST',
@@ -98,6 +107,11 @@ angular.module('myNewProjectApp')
                 $scope.appFunc.cusNotify(data.message, true);
                 $window.location.href = "#/home";
             })
+        },
+
+        /*保存试题*/
+        saveQuestion: function() {
+            var _self = this;
         }
     }
     var uploader = $scope.uploader = new FileUploader({

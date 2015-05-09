@@ -1,1 +1,40 @@
-<p>This is the test view.</p>
+<div ng-init="checkFunc.initFunc()">
+	<h4 class="exam-title">选择题</h4>
+	<div ng-repeat="qu in questions | orderBy: 'type'">
+
+		<!-- 单选 -->
+		<div ng-if="qu.type == 0" >
+			<h5 class="que-title"><span>{{ $index+1 }}.</span>{{ qu.question }}</h5>
+			<div class="radio" ng-repeat="an in ['answer1', 'answer2', 'answer3', 'answer4', 'answer5', 'answer6', 'answer7'] track by $index" ng-show=" qu[an]!= '0' ">
+			  	<label>
+			    	<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+			    	{{ qu[an] }}
+			  	</label>
+			</div>
+		</div>
+
+		<!-- 多选 -->
+		<div ng-if="qu.type == 1" >
+			<h5 class="que-title"><span>{{ $index+1 }}.</span>{{ qu.question }}</h5>
+			<div class="checkbox" ng-repeat="an in ['answer1', 'answer2', 'answer3', 'answer4', 	'answer5', 'answer6', 'answer7'] track by $index" ng-show=" qu[an]!= '0' ">
+			  	<label>
+				    <input type="checkbox" value="">
+				    {{ qu[an] }}
+			    </label>
+			</div>
+		</div>
+
+		<!-- 判断 -->
+		<div ng-if="qu.type == 2" >
+			<h5 class="que-title"><span>{{ $index+1 }}.</span>{{ qu.question }}</h5>
+			<div class="checkbox">
+			  	<label class="radio-inline">
+				  	<input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> {{ qu.answer1 }}
+				</label>
+				<label class="radio-inline">
+				  	<input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> {{ qu.answer2 }}
+				</label>
+			</div>
+		</div>	
+	</div>
+</div>

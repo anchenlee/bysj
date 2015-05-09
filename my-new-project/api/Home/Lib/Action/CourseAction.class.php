@@ -5,9 +5,11 @@
 			$con['id'] = $_GET['id'];
 			$con['keyword'] = $_GET['keyword'];
 			$con['ctype'] = $_GET['ctype'];
+
 			if(isset($con['id'])) {
-				$result = $course->where($con)->select();
-				$count = count($course->where($con)->select());
+				$data['id'] = $con["id"];
+				$result = $course->where($data)->select();
+				$count = count($course->where($data)->select());
 				if($count == 1) {
 					$this->ajaxReturn(
 						array(
@@ -71,7 +73,7 @@
 			$con['lab_url'] = $_POST['labFile']['file_url'];
 			$con['size'] = $_POST['labFile']['size'];
 			$con['ctype'] = $_POST['ctype'];
-			$con['createTime'] = mktime();
+			/*$con['createTime'] = time();*/
 			$con['uploader'] = $_POST['uploader'];
 			$con['testtype'] = $_POST['testType'];
 

@@ -27,9 +27,9 @@ angular.module('myNewProjectApp')
 	    		$http.get('../api/index.php/Course/getCourse?id='+ $routeParams.courseId)
 	    		.success(function(data) {
 	    			if(data.success) {
+	    				console.log(data);
 	    				_self.data = data.item;
 	    			}
-
 	    		})
 	    	}
 

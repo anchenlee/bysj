@@ -1,6 +1,6 @@
 <div class="upload-lab" ng-init= "uploadFunc.initFunc()">
 	<h5 ng-show="!hasAddLab">添加课程</h5>
-	<h5 ng-show="hasAddLab">添加课程考核</h5>
+	<h5 ng-show="hasAddLab">添加考核</h5>
 	<form ng-show="!hasAddLab">
 		<div class="form-group">
 			<label>课程类型</label>
@@ -43,7 +43,6 @@
 			<select class="form-control"
 					ng-options="tt.name for tt in testTypes"
 					ng-model="uploadFunc.data.testType"
-
 					ng-init="uploadFunc.data.testType = testTypes[0]"
 					ng-change="uploadFunc.checkType()">
 			</select>
