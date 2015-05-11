@@ -73,7 +73,6 @@
 			$con['lab_url'] = $_POST['labFile']['file_url'];
 			$con['size'] = $_POST['labFile']['size'];
 			$con['ctype'] = $_POST['ctype'];
-			/*$con['createTime'] = time();*/
 			$con['uploader'] = $_POST['uploader'];
 			$con['testtype'] = $_POST['testType'];
 
@@ -89,7 +88,7 @@
 			if($con) { 
 				$count = count($course->add($con));
 				if($count == 1) {
-					if(isset($con['testtype'])) {
+					if($con['testtype'] != 0) {
 						$courseId = $course->where($con)->getField('id');
 						$this->ajaxReturn(
 							array(
