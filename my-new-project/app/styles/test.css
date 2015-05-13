@@ -1,3 +1,4 @@
-.exam-title{ line-height: 40px;}
-.que-title{ }
+.paper-title{ text-align: center;}
+.exam-title{ line-height: 40px;font-weight: 600;}
 .que-title span{ display: inline-block; width: 20px;}
+.test-paper{ background: #fff; border: 1px solid #d3d3d3; padding: 50px;}

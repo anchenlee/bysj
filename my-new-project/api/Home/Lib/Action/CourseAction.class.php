@@ -126,28 +126,5 @@
 				);
 			}
 		}
-		public function addRequire() {
-			$require = M('Require');
-			$con['require'] = $_POST['require'];
-			$con['courseId'] = $_POST['courseId'];
-			$count = count($require->add($con));
-			if($count==1) {
-				$this->ajaxReturn(
-					array(
-						'item'=>'',
-						'message'=>'课程要求添加成功',
-						'success'=>true
-					)
-				);
-			} else {
-				$this->ajaxReturn(
-					array(
-						'item'=>'',
-						'message'=>'课程要求添加失败',
-						'success'=>false
-					)
-				);
-			}
-		}
 	}
 ?>

@@ -4,25 +4,28 @@
 			
 		</div>
 		<div class="course-rht">
-			<h5 class="c-title">{{ learnFunc.data.lab_name }}</h5>
+			<h5 class="c-title">{{ learnFunc.data.course.lab_name }}</h5>
 			<div class="course-info clearfix">
 				<div class="item-lft c-info-title">课程简介：</div>
-				<div class="item-rht c-info-con" ng-show="learnFunc.data.lab_intro">{{ learnFunc.data.lab_intro }}</div>
-				<div class="item-rht c-info-con" ng-show="!learnFunc.data.lab_intro">老师很懒，什么都没写</div>
+				<div class="item-rht c-info-con" ng-show="learnFunc.data.course.lab_intro">{{ learnFunc.data.course.lab_intro }}</div>
+				<div class="item-rht c-info-con" ng-show="!learnFunc.data.course.lab_intro">老师很懒，什么都没写</div>
 			</div>
 			<div class="course-info clearfix">
 				<div class="item-lft c-info-title">课程老师：</div>
-				<div class="item-rht c-info-con">{{ learnFunc.data.uploader }}</div>
+				<div class="item-rht c-info-con">{{ learnFunc.data.course.uploader }}</div>
 			</div>
 			<div class="collect" ng-click="hasCollect = true" title="收藏该课程">
 				<i class="fa" ng-class=" {'fa-heart-o': !hasCollect, 'fa-heart': hasCollect}"></i>
 			</div>
-			<div class="course-info clearfix">
+			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype">
 				<div class="item-lft c-info-title">课程要求：</div>
-				<div class="item-rht c-info-con">
-					<a href="#/test/{{ learnFunc.data.id }}">
+				<div class="item-rht c-info-con" ng-show="learnFunc.data.course.testtype == 2">
+					<a href="#/test/{{ learnFunc.data.course.id }}">
 						<button class="btn btn-sm btn-primary">开始考核</button>
 					</a>
+				</div>
+				<div class="item-rht c-info-con" ng-show="learnFunc.data.course.testtype == 1">
+					{{ learnFunc.data.require }}
 				</div>
 			</div>
 			

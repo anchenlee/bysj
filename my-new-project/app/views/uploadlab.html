@@ -113,37 +113,37 @@
 					<label for="">选项<span class="question-tips">(请勾选正确答案)</span></label>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="optionsRadios" >
+							<input type="checkbox" ng-model="sel1" ng-change="uploadFunc.checkBoxSel(sel1, 1)" ng-true-value="1" ng-false-value="0">
 							<input type="text" class="form-control" ng-model="questions[qnum].answer1" placeholder="请输入答案1">
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="optionsRadios">
+							<input type="checkbox" ng-model="sel2" ng-change="uploadFunc.checkBoxSel(sel2, 2)" ng-true-value="2" ng-false-value="0">
 							<input type="text" class="form-control" ng-model="questions[qnum].answer2" placeholder="请输入答案2">
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="optionsRadios" id="optionsRadios1" value="option1">
+							<input type="checkbox" ng-model="sel3" ng-change="uploadFunc.checkBoxSel(sel3, 3)" ng-true-value="3" ng-false-value="0">
 							<input type="text" class="form-control" ng-model="questions[qnum].answer3" placeholder="请输入答案3">
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="optionsRadios" id="optionsRadios1" value="option1">
+							<input type="checkbox" ng-model="sel4" ng-change="uploadFunc.checkBoxSel(sel4, 4)" ng-true-value="4" ng-false-value="0">
 							<input type="text" class="form-control" ng-model="questions[qnum].answer4" placeholder="请输入答案4">
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="optionsRadios" id="optionsRadios1" value="option1">
+							<input type="checkbox" ng-model="sel5" ng-change="uploadFunc.checkBoxSel(sel5, 5)" ng-true-value="5" ng-false-value="0">
 							<input type="text" class="form-control" ng-model="questions[qnum].answer5" placeholder="请输入答案5">
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
-							<input type="checkbox" name="optionsRadios" id="optionsRadios1" value="option1">
+							<input type="checkbox" ng-model="sel6" ng-change="uploadFunc.checkBoxSel(sel6, 6)" ng-true-value="6" ng-false-value="0">
 							<input type="text" class="form-control" ng-model="questions[qnum].answer6" placeholder="请输入答案6">
 						</label>
 					</div>
@@ -153,7 +153,7 @@
 			<div ng-if="uploadFunc.data.questionType.value == 2">
 				<div class="form-group">
 					<label for="">题目</label>
-					<input type="text" class="form-control" ng-model="questions[qnum]." placeholder="请输入题目">
+					<input type="text" class="form-control" ng-model="questions[qnum].question" placeholder="请输入题目">
 				</div>
 				<div class="form-group">
 					<label for="">选项<span class="question-tips">(请勾选正确答案)</span></label>
@@ -172,7 +172,7 @@
 				</div>
 			</div>
 			<button class="btn btn-success" ng-click="uploadFunc.nextQuestion()">下一题</button>
-			<button class="btn btn-primary" ng-click="">完成</button>
+			<button class="btn btn-primary" ng-click="uploadFunc.saveQuestion()">完成</button>
 		</div>
 		<!-- <button class="btn btn-sm btn-success c-back" ng-click="hasAddLab = false"></button> -->
 

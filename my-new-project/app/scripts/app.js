@@ -92,7 +92,6 @@ angular
         })
       },
       cusNotify: function (msg, bool) {
-        console.log(msg)
         var msgClass;
         msgClass = bool ? 'alert-success' : 'alert-danger';
         notify({

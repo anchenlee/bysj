@@ -2,9 +2,9 @@
 	class ExamAction extends Action{
 		public function getExamPaper() {
 			$exam = M('Exam_store');
-			$con['id'] = $_GET['id'];
-			if(isset($con['id'])) {
-				$data['cid'] = $con['id'];
+			$con['cid'] = $_GET['cid'];
+			if(isset($con['cid'])) {
+				$data['cid'] = $con['cid'];
 				$result = $exam->where($data)->select();
 				$count = count($exam->where($data)->select());
 				if($count) {
@@ -18,6 +18,32 @@
 				} 
 			}
 
+		}
+
+		public function addExamPaper() {
+			$exam = M('Exam_store');
+			$data = $_POST['questions'];
+			$count = 0;
+			for($i = 0; $i < count($data); $i++) {
+				$count = $count + count($exam->add($data[$i]));
+			}
+			if($count == count($data)) {
+				$this->ajaxReturn(
+					array(
+						'item'=>'',
+						'message'=>'试卷添加成功',
+						'success'=>true
+					)
+				);
+			} else {
+				$this->ajaxReturn(
+					array(
+						'item'=>'',
+						'message'=>'添加失败',
+						'success'=>false
+					)
+				);
+			}
 		}
 	}
 ?>
