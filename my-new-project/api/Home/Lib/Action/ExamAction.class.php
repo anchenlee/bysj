@@ -45,5 +45,34 @@
 				);
 			}
 		}
+
+		/* 提交试卷 */
+		public function submitPaper() {
+			$exam = M('Exam_record');
+			$con['uid'] = $_POST['uid'];
+			$con['uname'] = $_POST['uname'];
+			$con['score'] = $_POST['score'];
+			$con['papers'] = $_POST['papers'];
+			if($con) {
+				$count = $count + count($exam->add($con));
+				if($count == 1) {
+					$this->ajaxReturn(
+						array(
+							'item'=>'',
+							'message'=>'提交成功',
+							'success'=>true
+						)
+					);
+				} else {
+					$this->ajaxReturn(
+						array(
+							'item'=>'',
+							'message'=>'提交失败',
+							'success'=>false
+						)
+					);
+				}
+			}
+		}
 	}
 ?>

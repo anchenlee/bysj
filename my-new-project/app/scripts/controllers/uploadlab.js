@@ -180,7 +180,7 @@ angular.module('myNewProjectApp')
                 } else {
                     $scope.arr.forEach(function(value, key) {
                         if( v == value) {
-                            $scope.arr.splice(key);
+                            $scope.arr.splice(key, 1);
                         }
                     })
                 }
