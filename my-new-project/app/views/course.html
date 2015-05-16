@@ -27,28 +27,20 @@
 				<div class="item-rht c-info-con" ng-show="learnFunc.data.course.testtype == 1">
 					{{ learnFunc.data.require }}
 				</div>
+
 			</div>
-			
+			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 1">
+				<div class="item-lft c-info-title">提交作业：</div>
+				<input class="item-rht c-info-con" type="file" value="上传">
+			</div>
 		</div>
 	</div>
 	<!-- 该门课其他目录 和评论-->
 	<div class="course-dir">
 		<h5 class="c-title">相关课程</h5>
-		<ul>
+		<ul ng-repeat="re in relaCourses | orderBy : 'createTime'">
 			<li class="course-li">
-				<a href="">数据结构 第1章</a>
-			</li>
-			<li class="course-li">
-				<a href="">数据结构 第2章</a>
-			</li>
-			<li class="course-li">
-				<a href="">数据结构 第3章</a>
-			</li>
-			<li class="course-li">
-				<a href="">数据结构 第4章</a>
-			</li>
-			<li class="course-li">
-				<a href="">数据结构 第5章</a>
+				<a href="#/course/{{ re.id }}">{{ re.lab_name }}</a>
 			</li>
 		</ul>
 	</div>

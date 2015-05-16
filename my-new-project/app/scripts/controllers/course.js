@@ -30,10 +30,11 @@ angular.module('myNewProjectApp')
 	    		.success(function(data) {
 	    			if(data.success) {
 	    				_self.data.course = data.item;
-	    				console.log(555);
 	    				if(data.item.testtype == 1) {
-	    					console.log(5666);
 	    					_self.getRequire();
+	    				}
+	    				if(data.item.ctype) {
+	    					_self.getRelaCourse(data.item.ctype);
 	    				}
 	    			}
 	    		})
@@ -45,6 +46,21 @@ angular.module('myNewProjectApp')
 	    		.success(function(data) {
 	    			if(data.success) {
 	    				_self.data.require = data.item; 
+	    			}
+	    		})
+	    	},
+	    	/*  获取相关课程*/
+	    	getRelaCourse: function(type) {
+	    		var _self = this;
+	    		$http.get('../api/index.php/Course/getCourse?ctype='+ type)
+	    		.success(function(data) {
+	    			if(data.success) {
+	    				data.item.forEach(function(v, key) {
+	    					if(v.id == _self.data.course) {
+	    						data.item.splice(key, 1);
+	    					}
+	    				})
+	    				$scope.relaCourses = data.item; 
 	    			}
 	    		})
 	    	}
