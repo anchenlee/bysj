@@ -5,6 +5,12 @@
 		</div>
 		<div class="course-rht">
 			<h5 class="c-title">{{ learnFunc.data.course.lab_name }}</h5>
+
+			<!-- 收藏课程 -->
+			<div class="collect" ng-click="hasCollect = true" title="收藏该课程">
+				<i class="fa" ng-class=" {'fa-heart-o': !hasCollect, 'fa-heart': hasCollect}"></i>
+			</div>
+
 			<div class="course-info clearfix">
 				<div class="item-lft c-info-title">课程简介：</div>
 				<div class="item-rht c-info-con" ng-show="learnFunc.data.course.lab_intro">{{ learnFunc.data.course.lab_intro }}</div>
@@ -14,24 +20,45 @@
 				<div class="item-lft c-info-title">课程老师：</div>
 				<div class="item-rht c-info-con">{{ learnFunc.data.course.uploader }}</div>
 			</div>
-			<div class="collect" ng-click="hasCollect = true" title="收藏该课程">
-				<i class="fa" ng-class=" {'fa-heart-o': !hasCollect, 'fa-heart': hasCollect}"></i>
-			</div>
-			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype">
+
+			
+
+			<!-- 课程要求 -->
+			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 1">
 				<div class="item-lft c-info-title">课程要求：</div>
-				<div class="item-rht c-info-con" ng-show="learnFunc.data.course.testtype == 2">
-					<a href="#/test/{{ learnFunc.data.course.id }}">
+				<div class="item-rht c-info-con">
+					{{ learnFunc.data.require }}
+				</div>
+			</div>
+			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 2 && adminConfig.userType == 2">
+				<div class="item-lft c-info-title">课程要求：</div>
+				<div class="item-rht c-info-con">
+					<a href="#/test/{{ learnFunc.data.course.id }}" >
 						<button class="btn btn-sm btn-primary">开始考核</button>
 					</a>
 				</div>
-				<div class="item-rht c-info-con" ng-show="learnFunc.data.course.testtype == 1">
-					{{ learnFunc.data.require }}
-				</div>
-
 			</div>
-			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 1">
-				<div class="item-lft c-info-title">提交作业：</div>
-				<input class="item-rht c-info-con" type="file" value="上传">
+
+			<!-- 学生提交作业 -->
+			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 1 && adminConfig.userType == 2 && !hasSubmitTask">
+				<!-- <div class="item-lft c-info-title">提交作业：</div> -->
+				<input type="file" nv-file-select uploader="uploader">
+				<button class=" btn btn-sm btn-primary" ng-click="learnFunc.submitHomework()">提交</button>
+			</div>
+			<!-- 已经提交 -->
+			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 1 && adminConfig.userType == 2 && hasSubmitTask">
+				<!-- <div class="item-lft c-info-title">提交作业：</div> -->
+				<button class=" btn btn-sm btn-primary">作业已经提交</button>
+			</div>
+{{learnFunc.data.course.testtype == 1 && adminConfig.userType == 1}}
+			<!-- 老师查看作业 -->
+			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 1 && adminConfig.userType == 1">
+				<div class="item-lft c-info-title">教师考核：</div>
+				<div class="item-rht c-info-con">
+					<a href="#/task/{{ learnFunc.data.course.id }}" >
+						<button class="btn btn-sm btn-primary">批改作业</button>
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>

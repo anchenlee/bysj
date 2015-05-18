@@ -8,7 +8,7 @@
  * Controller of the myNewProjectApp
  */
 angular.module('myNewProjectApp')
-	.controller('CourseCtrl', function ($scope, $routeParams, $http) {
+	.controller('CourseCtrl', function ($scope, $routeParams, $http, FileUploader) {
 	    $scope.awesomeThings = [
 	        'HTML5 Boilerplate',
 	        'AngularJS',
@@ -22,6 +22,7 @@ angular.module('myNewProjectApp')
 	    	initFunc: function() {
 	    		var _self = this;
 	    		_self.getCourseInfo(); //初始化课程内容
+	    		$scope.hasSubmitTask = false;
 	    	},
 	    	/* 获取该课程内容 */
 	    	getCourseInfo: function() {
@@ -63,6 +64,67 @@ angular.module('myNewProjectApp')
 	    				$scope.relaCourses = data.item; 
 	    			}
 	    		})
+	    	},
+	    	/* 交作业 */
+	    	submitHomework: function() {
+	    		var _self = this;
+                $http({
+                    method: 'POST',
+                    url: '../api/index.php/Task/addTask',
+                    data: $.param({
+                        uid: $scope.adminConfig.id,
+                        uname: $scope.adminConfig.userName,
+                        taskfile: $scope.cfile,
+                        cid: $routeParams.courseId
+                    }),
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                }).success(function(data) {
+                    if (data.success) {
+                    	$scope.appFunc.cusNotify(data.message, true);
+                    	$scope.hasSubmitTask = true;
+                    } else{
+                    	$scope.appFunc.cusNotify(data.message, false);
+                    }
+                })
 	    	}
 	    }
+
+	    /* 上传文件 */
+	    var uploader = $scope.uploader = new FileUploader({
+            url: '../api/index.php/FileUpload/upload',
+            autoUpload: true,
+            isUploading: true
+        });
+
+        // FILTERS
+
+        uploader.filters.push({
+            name: 'customFilter',
+            fn: function(item) { //上传文件类型
+                return this.queue.length < 10;
+            }
+        });
+
+        // CALLBACKS
+
+        uploader.onWhenAddingFileFailed = function(item, filter, options) {
+            console.info('onWhenAddingFileFailed', item, filter, options);
+        };
+        uploader.onAfterAddingFile = function(fileItem) {
+            console.info('onAfterAddingFile', fileItem);
+        };
+        uploader.onAfterAddingAll = function(addedFileItems) {
+            console.info('onAfterAddingAll', addedFileItems);
+        };
+        uploader.onBeforeUploadItem = function(item) {
+            console.info('onBeforeUploadItem', item);
+        };
+        uploader.onSuccessItem = function(fileItem, response, status, headers) {
+            console.info('onSuccessItem', fileItem, response, status, headers);
+            $scope.cfile = response.answer.file;
+        };
 	});
+
+

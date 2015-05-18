@@ -52,6 +52,10 @@ angular
         templateUrl: 'views/test.html',
         controller: 'TestCtrl'
       })
+      .when('/task/:taskId', {
+        templateUrl: 'views/task.html',
+        controller: 'TaskCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
