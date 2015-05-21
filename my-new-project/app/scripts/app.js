@@ -18,7 +18,8 @@ angular
     'ngTouch',
     'cgNotify',
     'ui.bootstrap',
-    'angularFileUpload'
+    'angularFileUpload',
+    'cipchk'
   ])
   .config(function ($routeProvider) {
     console.log(111, $routeProvider);/*

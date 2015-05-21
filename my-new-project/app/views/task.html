@@ -7,19 +7,38 @@
 			<th>大小</th>
 			<th>时间</th>
 			<th>操作</th>
+			<th>分数</th>
 		</tr>
 		<tr ng-repeat="task in taskFunc.data.task">
 			<td>{{ $index + 1 }}</td>
 			<td>{{ task.uname }}</td>
 			<td>
-				<a href="{{ task.task_url }}" target="_blank">
+				<a href="uploads/{{ task.localName }}" target="_blank">
 					<i class="fa fa-file-zip-o"></i>
 					<span>{{ task.fname }}</span>
 				</a> 
 			</td>
 			<td>{{ task.size }}</td>
 			<td>{{ task.createTime }}</td>
-			<td><button class="btn btn-primary btn-sm">下载</button></td>
+			<td>
+				<a href="uploads/{{ task.localName }}" target="_blank">
+					<button class="btn btn-primary btn-sm">下载</button>
+				</a> 
+			</td>
+			<td>
+				<form class="form-inline">
+					<select class="form-control" 
+						ng-model="task.score" 
+						ng-init="task.score = option[0]"
+						ng-options="op.name for op in taskFunc.data.scoreOptions">
+						<option value="">请打分</option>
+					</select>
+					<input type="text" class="form-control" ng-model="task.reason" ng-show="task.score.value == 0" placeholder="说明不及格原因"/>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			
 		</tr>
 	</table>
 </div>
