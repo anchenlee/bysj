@@ -16,22 +16,19 @@ angular.module('myNewProjectApp')
     ];
 
     $scope.taskFunc = {
-    	data:'',
+    	data:{
+            task: ''
+        },
     	initFunc: function() {
     		var _self = this;
     		_self.getTask();
     	},
     	getTask: function() {
+            var _self = this;
     		$http.get('../api/index.php/Task/getTask?cid='+ $routeParams.taskId)
     		.success(function(data) {
     			if(data.success) {
-    				_self.data.course = data.item;
-    				if(data.item.testtype == 1) {
-    					_self.getRequire();
-    				}
-    				if(data.item.ctype) {
-    					_self.getRelaCourse(data.item.ctype);
-    				}
+    				_self.data.task = data.item;
     			}
     		})
     	}

@@ -1,3 +1,25 @@
 <div class="task-tab" ng-init="taskFunc.initFunc()">
-
+	<table class="table table-striped table-hover table-bordered">
+		<tr>
+			<th>序号</th>
+			<th>姓名</th>
+			<th>文件</th>
+			<th>大小</th>
+			<th>时间</th>
+			<th>操作</th>
+		</tr>
+		<tr ng-repeat="task in taskFunc.data.task">
+			<td>{{ $index + 1 }}</td>
+			<td>{{ task.uname }}</td>
+			<td>
+				<a href="{{ task.task_url }}" target="_blank">
+					<i class="fa fa-file-zip-o"></i>
+					<span>{{ task.fname }}</span>
+				</a> 
+			</td>
+			<td>{{ task.size }}</td>
+			<td>{{ task.createTime }}</td>
+			<td><button class="btn btn-primary btn-sm">下载</button></td>
+		</tr>
+	</table>
 </div>

@@ -4,7 +4,8 @@
 			$task =M("Task");
 			$con['uid'] = $_POST['uid'];
 			$con['uname'] = $_POST['uname'];
-			$con['cid'] = $_POST['cid'];
+			$con['cid'] = $_POST['taskfile']['name'];
+			$con['fname'] = $_POST['cid'];
 			$con['task_url'] = $_POST['taskfile']['file_url'];
 			$con['size'] = $_POST['taskfile']['size'];
 			$count = count($task->add($con));
@@ -31,10 +32,8 @@
 		/* 获取作业列表 */
 		public function getTask() {
 			$task =M("Task");
-			$con['cid'] = $_POST['cid'];
-			$data['cid'] = $con['cid'];
-			var_dump($con);
-			exit;
+			$con['cid'] = $_GET['cid'];
+			$data['cid'] = $con['cid'];    
 			$result = $task->where($data)->select();
 			
 			if($result) {
