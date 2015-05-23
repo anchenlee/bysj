@@ -50,6 +50,7 @@
 		public function submitPaper() {
 			$exam = M('Exam_record');
 			$con['uid'] = $_POST['uid'];
+			$con['cid'] = $_POST['cid'];
 			$con['uname'] = $_POST['uname'];
 			$con['score'] = $_POST['score'];
 			$con['papers'] = $_POST['papers'];
@@ -72,6 +73,22 @@
 						)
 					);
 				}
+			}
+		}
+
+		/* 获取考试情况 */
+		public function getExamRecord() {
+			$Exam = M('Exam_record');
+			$con['cid'] = $_GET['cid'];
+			$result = $Exam->where($con)->select();
+			if($result) {
+				$this->ajaxReturn(
+					array(
+						'item'=> $result,
+						'message'=>'获取结果成功',
+						'success'=>true
+					)
+				);
 			}
 		}
 	}

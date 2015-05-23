@@ -3,10 +3,10 @@
 		<tr>
 			<th>序号</th>
 			<th>姓名</th>
-			<th>文件</th>
+			<th>文件(点击查看)</th>
 			<th>大小</th>
 			<th>时间</th>
-			<th>操作</th>
+			<!-- <th>操作</th> -->
 			<th>分数</th>
 		</tr>
 		<tr ng-repeat="task in taskFunc.data.task">
@@ -20,25 +20,24 @@
 			</td>
 			<td>{{ task.size }}</td>
 			<td>{{ task.createTime }}</td>
-			<td>
+			<!-- <td>
 				<a href="uploads/{{ task.localName }}" target="_blank">
 					<button class="btn btn-primary btn-sm">下载</button>
 				</a> 
-			</td>
+			</td> -->
 			<td>
 				<form class="form-inline">
-					<select class="form-control" 
+					<select class="form-control input-sm" 
 						ng-model="task.score" 
 						ng-init="task.score = option[0]"
-						ng-options="op.name for op in taskFunc.data.scoreOptions">
+						ng-options="op.name for op in taskFunc.data.scoreOptions"
+						required="required">
 						<option value="">请打分</option>
 					</select>
-					<input type="text" class="form-control" ng-model="task.reason" ng-show="task.score.value == 0" placeholder="说明不及格原因"/>
+					<input type="text" class="form-control input-sm" ng-model="task.reason" ng-show="task.score.value == 0" placeholder="说明不及格原因" required/>
 				</form>
 			</td>
 		</tr>
-		<tr>
-			
-		</tr>
 	</table>
+	<button class="btn btn-primary btn-sm btn-save" ng-click="taskFunc.saveScore()">保存</button>	
 </div>

@@ -54,5 +54,43 @@
 				);
 			}
 		}
+		public function saveScore() {
+			$Task = M('Task');
+			$con['task'] = $_POST['task'];
+			foreach ($con['task'] as $key => $value) {
+				# code...
+				$conn['id'] = $value['id'];
+				$conn['cid'] = $value['cid'];
+				$conn['uid'] = $value['uid'];
+				$data['score'] = $value['score']['value'];
+				$data['reason'] = $value['reason'];
+
+				$count = count($Task->where($conn) -> save($data));
+				if($count != 1) {
+					$bool = false;
+					break;
+				} else{ 
+					$bool = true;
+				}
+			}
+			if($bool) {
+				$this->ajaxReturn(
+					array(
+						'item'=>'',
+						'message'=>'保存成功',
+						'success'=>true
+					)
+				);
+			} else {
+				$this->ajaxReturn(
+					array(
+						'item'=>'',
+						'message'=>'保存失败',
+						'success'=>false
+					)
+				);
+			}
+			
+		}
 	}
 ?>

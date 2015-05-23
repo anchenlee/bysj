@@ -42,6 +42,34 @@ angular.module('myNewProjectApp')
     				_self.data.task = data.item;
     			}
     		})
-    	}
+    	},
+        /* 打分 */
+        saveScore: function() {
+            var _self = this;
+            _self.data.task.forEach(function(v, key) {
+                if(!v.score) {
+                    $scope.appFunc.cusNotify('请打分', true);
+                } else if(v.score.value == 0 && !v.reason) {
+                    $scope.appFunc.cusNotify('请说明不及格原因', true);
+                } else {
+                    $http({
+                        method: 'POST',
+                        url: '../api/index.php/Task/saveScore',
+                        data: $.param({
+                            task: _self.data.task
+                        }),
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    }).success(function(data) {
+                        if (data.success) {
+                            $scope.appFunc.cusNotify(data.message, true);
+                        } else{
+                            $scope.appFunc.cusNotify(data.message, false);
+                        }
+                    })
+                }
+            })
+        }
     }
-  });
+});

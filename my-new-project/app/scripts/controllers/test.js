@@ -96,6 +96,7 @@ angular.module('myNewProjectApp')
                 data: $.param({
                     uid: $scope.adminConfig.id,
                     uname: $scope.adminConfig.userName,
+                    cid: $routeParams.testId,
                     score: $scope.score,
                     /* mtime: 60,*/  //用时
                     /*ip:*/ 

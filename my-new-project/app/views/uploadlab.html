@@ -1,30 +1,29 @@
 <div class="upload-lab" ng-init= "uploadFunc.initFunc()">
 	<h5 ng-show="!hasTest">添加课程</h5>
 	<h5 ng-show="hasTest">添加考核</h5>
-	<form ng-show="!hasTest">
+	<form ng-show="!hasTest" name="upForm">
 		<div class="form-group">
 			<label>课程类型</label>
 			<div>
 				<label class="radio-inline">
-				  <input type="radio" name="inlineRadio" ng-model="uploadFunc.data.ctype" value="1"> C++
+				  <input type="radio" name="inlineRadio" ng-model="uploadFunc.data.ctype" value="1" required> C++
 				</label>
 				<label class="radio-inline">
-				  <input type="radio" name="inlineRadio" ng-model="uploadFunc.data.ctype" value="2"> Visual Basic
+				  <input type="radio" name="inlineRadio" ng-model="uploadFunc.data.ctype" value="2" required> Visual Basic
 				</label>
 				<label class="radio-inline">
-				  <input type="radio" name="inlineRadio" ng-model="uploadFunc.data.ctype" value="3"> 数据库
+				  <input type="radio" name="inlineRadio" ng-model="uploadFunc.data.ctype" value="3" required> 数据库
 				</label>
 			</div>
-
 		</div>
 		<div class="form-group">
 			<label>课程名</label>
-			<input type="text" class="form-control" ng-model="uploadFunc.data.labName" placeholder="请输入课程名">
+			<input type="text" class="form-control" name="upName" ng-model="uploadFunc.data.labName" placeholder="请输入课程名" required>
 		</div>
 
 		<div class="form-group">
 			<label>课程介绍</label>
-			<textarea type="text" class="form-control" rows="4" ng-model="uploadFunc.data.labIntro" placeholder="请输入课程介绍"></textarea>
+			<textarea type="text" class="form-control" name="upIntro" rows="4" ng-model="uploadFunc.data.labIntro" placeholder="请输入课程介绍" required></textarea>
 		</div>
 		<div class="form-group">
 			<label for="exampleInputFile">上传课件</label>
@@ -38,24 +37,39 @@
 					ng-options="tt.name for tt in testTypes"
 					ng-model="uploadFunc.data.testType"
 					ng-init="uploadFunc.data.testType = testTypes[0]"
-					ng-change="uploadFunc.checkTestType()">
+					ng-change="uploadFunc.checkTestType()"
+					required>
 			</select>
 		</div>
 
-		<button type="submit" class="btn btn-primary" ng-click="uploadFunc.saveCourse(1)" ng-show="uploadFunc.data.testType.value">下一步</button>
-		<button class="btn btn-primary" ng-click="uploadFunc.saveCourse(0)" ng-show="!uploadFunc.data.testType.value">完成</button> 
+		<button type="submit" 
+				class="btn btn-primary" 
+				ng-click="uploadFunc.saveCourse(1)" 
+				ng-show="uploadFunc.data.testType.value"
+				ng-disabled="upForm.inlineRadio.$error.required 
+				|| upForm.upName.$error.required
+				|| upForm.upIntro.$error.required">下一步</button>
+		<button class="btn btn-primary" 
+				ng-click="uploadFunc.saveCourse(0)" 
+				ng-show="!uploadFunc.data.testType.value"
+				ng-disabled="upForm.inlineRadio.$error.required 
+				|| upForm.upName.$error.required
+				|| upForm.upIntro.$error.required">完成</button> 
 
 		<!-- ng-click="uploadFunc.saveCourse()" -->
 	</form>
 
 	<!-- 添加考核 -->
-	<form ng-show="hasTest">
+	<form ng-show="hasTest" name="testForm" novalidate>
 		<!-- 课后作业 -->
 		<div class="form-group" ng-show="uploadFunc.data.testType.value == 1">
 			<label>作业要求</label>
-			<textarea type="text" class="form-control" rows="4" ng-model="uploadFunc.data.require" placeholder="请输入作业要求"></textarea>
+			<textarea type="text" name="testRequire" class="form-control" rows="4" ng-model="uploadFunc.data.require" placeholder="请输入作业要求" required></textarea>
 		</div>
-		<button class="btn btn-primary" ng-click="uploadFunc.saveRequire()" ng-show="uploadFunc.data.testType.value == 1">完成</button>
+		<button class="btn btn-primary"  
+				ng-click="uploadFunc.saveRequire()" 
+				ng-show="uploadFunc.data.testType.value == 1"
+				ng-disabled="testForm.testRequire.$error.required">完成</button>
 
 		<!-- 模块测试 -->
 		<div class="form-group question-box" ng-show="uploadFunc.data.testType.value == 2" ng-init="questionCount = 1">
@@ -69,23 +83,24 @@
 				</select>
 			</div>
 			<!-- 测试题 -->
+			<!-- 单选 -->
 			<div ng-if="uploadFunc.data.questionType.value == 0" >
 				<div class="form-group">
 					<label for="">题目</label>
-					<input type="text" class="form-control" ng-model="questions[qnum].question" placeholder="请输入题目">
+					<input type="text" class="form-control" name="testTitle" ng-model="questions[qnum].question" placeholder="请输入题目" required>
 				</div>
 				<div class="form-group">
 					<label for="">选项<span class="question-tips">(请勾选正确答案)</span></label>
 					<div class="radio">
 						<label>
 							<input type="radio" name="optionsRadios" ng-model="questions[qnum].correct" id="optionsRadios1" value="1">
-							<input type="text" class="form-control" ng-model="questions[qnum].answer1" placeholder="请输入答案1">
+							<input type="text" class="form-control" ng-model="questions[qnum].answer1" placeholder="请输入答案1" name="testAns1" required>
 						</label>
 					</div>
 					<div class="radio">
 						<label>
 							<input type="radio" name="optionsRadios" ng-model="questions[qnum].correct" id="optionsRadios2" value="2">
-							<input type="text" class="form-control" ng-model="questions[qnum].answer2" placeholder="请输入答案2">
+							<input type="text" class="form-control" ng-model="questions[qnum].answer2" placeholder="请输入答案2" name="testAns2" required>
 						</label>
 					</div>
 					<div class="radio">
@@ -106,20 +121,20 @@
 			<div ng-if="uploadFunc.data.questionType.value == 1">
 				<div class="form-group">
 					<label for="">题目</label>
-					<input type="text" class="form-control" ng-model="questions[qnum].question" placeholder="请输入题目">
+					<input type="text" class="form-control" ng-model="questions[qnum].question" placeholder="请输入题目" name="testTitle" required>
 				</div>
 				<div class="form-group">
 					<label for="">选项<span class="question-tips">(请勾选正确答案)</span></label>
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" ng-model="sel1" ng-change="uploadFunc.checkBoxSel(sel1, 1)" ng-true-value="1" ng-false-value="0">
-							<input type="text" class="form-control" ng-model="questions[qnum].answer1" placeholder="请输入答案1">
+							<input type="text" class="form-control" ng-model="questions[qnum].answer1" placeholder="请输入答案1" name="testAns1" required>
 						</label>
 					</div>
 					<div class="checkbox">
 						<label>
 							<input type="checkbox" ng-model="sel2" ng-change="uploadFunc.checkBoxSel(sel2, 2)" ng-true-value="2" ng-false-value="0">
-							<input type="text" class="form-control" ng-model="questions[qnum].answer2" placeholder="请输入答案2">
+							<input type="text" class="form-control" ng-model="questions[qnum].answer2" placeholder="请输入答案2" name="testAns2" required>
 						</label>
 					</div>
 					<div class="checkbox">
@@ -152,26 +167,34 @@
 			<div ng-if="uploadFunc.data.questionType.value == 2">
 				<div class="form-group">
 					<label for="">题目</label>
-					<input type="text" class="form-control" ng-model="questions[qnum].question" placeholder="请输入题目">
+					<input type="text" class="form-control" ng-model="questions[qnum].question" placeholder="请输入题目" name="testTitle" required>
 				</div>
 				<div class="form-group">
 					<label for="">选项<span class="question-tips">(请勾选正确答案)</span></label>
 					<div class="radio">
 						<label>
-							<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-							<input type="text" class="form-control" ng-model="questions[qnum].answer1" placeholder="请输入答案1">
+							<input type="radio" name="optionsRadios" ng-model="questions[qnum].correct" id="optionsRadios1" value="option1">
+							<input type="text" class="form-control" ng-model="questions[qnum].answer1" placeholder="请输入答案1" name="testAns1" required>
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
-							<input type="text" class="form-control" ng-model="questions[qnum].answer2" placeholder="请输入答案2">
+							<input type="radio" name="optionsRadios" ng-model="questions[qnum].correct" id="optionsRadios1" value="option1">
+							<input type="text" class="form-control" ng-model="questions[qnum].answer2" placeholder="请输入答案2" name="testAns2" required>
 						</label>
 					</div>
 				</div>
 			</div>
-			<button class="btn btn-success" ng-click="uploadFunc.nextQuestion()">下一题</button>
-			<button class="btn btn-primary" ng-click="uploadFunc.saveQuestion()">完成</button>
+			<button class="btn btn-success" 
+					ng-click="uploadFunc.nextQuestion()"
+					ng-disabled="testForm.testTitle.$error.required
+					|| testForm.testAns1.$error.required
+					|| testForm.testAns2.$error.required">下一题</button>
+			<button class="btn btn-primary" 
+					ng-click="uploadFunc.saveQuestion()"
+					ng-disabled="testForm.testTitle.$error.required
+					|| testForm.testAns1.$error.required
+					|| testForm.testAns2.$error.required">完成</button>
 		</div>
 		<!-- <button class="btn btn-sm btn-success c-back" ng-click="hasAddLab = false"></button> -->
 

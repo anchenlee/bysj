@@ -1,7 +1,8 @@
 <div class="course-module" ng-init="learnFunc.initFunc()">
 	<div class="course-view clearfix">
 		<div class="course-lft">
-			<a ng-href=" file:///{{ learnFunc.data.course.lab_url }}" target="_blank">开始学习</a>
+			<!-- <ng-pdf template-url="../app/partials/viewer.html" canvasid="pdf" scale="1.5"></ng-pdf> -->
+			<a href="uploads/20150521162320316.docx " target="_blank">{{ learnFunc.data.course.lab_url }}开始</a>
 		</div>
 		<div class="course-rht">
 			<h5 class="c-title">{{ learnFunc.data.course.lab_name }}</h5>
@@ -20,8 +21,6 @@
 				<div class="item-lft c-info-title">课程老师：</div>
 				<div class="item-rht c-info-con">{{ learnFunc.data.course.uploader }}</div>
 			</div>
-
-			
 
 			<!-- 课程要求 -->
 			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 1">
@@ -50,13 +49,22 @@
 				<!-- <div class="item-lft c-info-title">提交作业：</div> -->
 				<button class=" btn btn-sm btn-primary">作业已经提交</button>
 			</div>
-{{learnFunc.data.course.testtype == 1 && adminConfig.userType == 1}}
 			<!-- 老师查看作业 -->
 			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 1 && adminConfig.userType == 1">
 				<div class="item-lft c-info-title">教师考核：</div>
 				<div class="item-rht c-info-con">
 					<a href="#/task/{{ learnFunc.data.course.id }}" >
 						<button class="btn btn-sm btn-primary">批改作业</button>
+					</a>
+				</div>
+			</div>
+
+			<!-- 老师查看在线测试结果 -->
+			<div class="course-info clearfix" ng-show="learnFunc.data.course.testtype == 2 && adminConfig.userType == 1">
+				<div class="item-lft c-info-title">教师考核：</div>
+				<div class="item-rht c-info-con">
+					<a href="#/checking/{{ learnFunc.data.course.id }}" >
+						<button class="btn btn-sm btn-primary">考核结果</button>
 					</a>
 				</div>
 			</div>

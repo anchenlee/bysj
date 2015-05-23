@@ -19,7 +19,8 @@ angular
     'cgNotify',
     'ui.bootstrap',
     'angularFileUpload',
-    'cipchk'
+    /*'cipchk'*/
+    'pdf'
   ])
   .config(function ($routeProvider) {
     console.log(111, $routeProvider);/*
@@ -56,6 +57,14 @@ angular
       .when('/task/:taskId', {
         templateUrl: 'views/task.html',
         controller: 'TaskCtrl'
+      })
+      .when('/checking/:checkingId', {
+        templateUrl: 'views/checking.html',
+        controller: 'CheckingCtrl'
+      })
+      .when('/marking/:markingId/:uid', {
+        templateUrl: 'views/marking.html',
+        controller: 'MarkingCtrl'
       })
       .otherwise({
         redirectTo: '/'
@@ -97,6 +106,7 @@ angular
         })
       },
       cusNotify: function (msg, bool) {
+        notify.closeAll();
         var msgClass;
         msgClass = bool ? 'alert-success' : 'alert-danger';
         notify({

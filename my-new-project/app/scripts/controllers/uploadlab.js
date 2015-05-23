@@ -25,6 +25,7 @@ angular.module('myNewProjectApp')
                 cid: ''
             },
             initFunc: function() {
+                $scope.hasUpCouese = false;
                 $scope.hasTest = false;
                 $scope.isTestOnline = false;
                 $scope.testTypes = [{
@@ -91,7 +92,10 @@ angular.module('myNewProjectApp')
             /* 保存上传课程 */
             saveCourse: function(bool) {
                 var _self = this;
-                console.log(_self.data.testType.value);
+                if($scope.cfile == null) {
+                    $scope.appFunc.cusNotify('请上传课件', true);
+                    return false;
+                } 
                 $http({
                     method: 'POST',
                     url: '../api/index.php/Course/addCourse',
@@ -170,6 +174,12 @@ angular.module('myNewProjectApp')
             /* 下一题 */
             nextQuestion: function() {
                 var _self = this;
+                console.log('444', _self.data.questionType.value, $scope.questions[$scope.qnum].correct);
+               
+                if(!$scope.questions[$scope.qnum].correct) {
+                    $scope.appFunc.cusNotify('请勾选正确答案', true);
+                    return false;
+                }
                 $scope.qnum = $scope.qnum + 1;
                 _self.initQuestion($scope.qnum);
             },
