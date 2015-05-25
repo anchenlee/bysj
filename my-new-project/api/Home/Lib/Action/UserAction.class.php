@@ -25,32 +25,41 @@
 		public function login() {
 			$user = M('User');
 			$con['userId'] = $_POST['userId'];
-			$con['password'] = md5($_POST['password']);
+			$data['userId'] = $_POST['userId'];
+			$data['password'] = md5($_POST['password']);
 			/*$con['userType'] = $_POST['userType'];*/
-			if(isset($con['userId']) && isset($con['password'])){/* && isset($con['userType']*/
+			if(isset($data['userId']) && isset($data['password'])){/* && isset($con['userType']*/
 				$count = count($user->where($con)->select()); 
-				if($count == 1) {
-					$resule['id'] = $user->where($con)->getField('id');
-					$resule['userName'] = $user->where($con)->getField('userName');
-					$resule['userType'] = $user->where($con)->getField('userType');
-					$resule['superAdmin'] = $user->where($con)->getField('superAdmin');
-					$resule['teamAdmin'] = $user->where($con)->getField('teamAdmin');
-					
-					$_SESSION = $resule;
-					$this->ajaxReturn(
-						array(
-							'item'=>array(
-								'id'=>$resule['id'], 
-								'userName'=>$resule['userName'], 
-								'userType'=>$resule['userType'], 
-								'superAdmin'=>$resule['superAdmin'], 
-								'teamAdmin'=>$resule['teamAdmin']
-							), 
-							'message'=>'登录成功', 
-							'success'=>true
-						),'JSON');
-				} else {
+				if($count == 0) {
 					$this->ajaxReturn(array('message'=>'帐号不存在','success'=>false),'JSON');
+				} else if($count == 1) {
+					$count1 = count($user->where($data)->select());
+					if($count1 == 1) {
+						$resule['id'] = $user->where($con)->getField('id');
+						$resule['userName'] = $user->where($con)->getField('userName');
+						$resule['userType'] = $user->where($con)->getField('userType');
+						$resule['superAdmin'] = $user->where($con)->getField('superAdmin');
+						$resule['teamAdmin'] = $user->where($con)->getField('teamAdmin');
+						
+						$_SESSION = $resule;
+						$this->ajaxReturn(
+							array(
+								'item'=>array(
+									'id'=>$resule['id'], 
+									'userName'=>$resule['userName'], 
+									'userType'=>$resule['userType'], 
+									'superAdmin'=>$resule['superAdmin'], 
+									'teamAdmin'=>$resule['teamAdmin']
+								), 
+								'message'=>'登录成功', 
+								'success'=>true
+							),'JSON');
+					} else {
+						$this->ajaxReturn(array('message'=>'密码错误','success'=>false),'JSON');
+					}
+					
+				} else {
+					$this->ajaxReturn(array('message'=>'登录异常','success'=>false),'JSON');
 				}
 			} else {
 				$this->ajaxReturn(array('message'=>'请输入完整的信息','success'=>false),'JSON');

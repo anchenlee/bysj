@@ -90,6 +90,8 @@ angular.module('myNewProjectApp')
                 $scope.ans[v.id] = v.answer;
             });
 
+            console.log(77, $scope.ans);
+            /*return false;*/
             $http({
                 method: 'POST',
                 url: '../api/index.php/Exam/submitPaper',
@@ -100,7 +102,7 @@ angular.module('myNewProjectApp')
                     score: $scope.score,
                     /* mtime: 60,*/  //用时
                     /*ip:*/ 
-                    papers: $.param($scope.ans)
+                    papers: JSON.stringify($scope.ans)
                 }),
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'

@@ -1,0 +1,5 @@
+.mark-box .user-info{ margin: 40px 10px;border-bottom: 1px solid #aaa;}
+.mark-box .user-info span{ font-weight: 600;margin-left: 100px;}
+.correct-tips{ margin-bottom: 10px;}
+.correct-tips .fa-check{ color: #009c5a;}
+.correct-tips .fa-times{ color: #da4c38;}

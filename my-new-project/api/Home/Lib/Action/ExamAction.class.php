@@ -80,11 +80,29 @@
 		public function getExamRecord() {
 			$Exam = M('Exam_record');
 			$con['cid'] = $_GET['cid'];
+			/*$con['uid'] = $_GET['uid'];*/
 			$result = $Exam->where($con)->select();
 			if($result) {
 				$this->ajaxReturn(
 					array(
 						'item'=> $result,
+						'message'=>'获取结果成功',
+						'success'=>true
+					)
+				);
+			}
+		}
+
+		/* 获取某人考试情况 */
+		public function getUserRecord() {
+			$Exam = M('Exam_record');
+			$con['cid'] = $_GET['cid'];
+			$con['uid'] = $_GET['uid'];
+			$result = $Exam->where($con)->select();
+			if($result) {
+				$this->ajaxReturn(
+					array(
+						'item'=> $result[0],
 						'message'=>'获取结果成功',
 						'success'=>true
 					)
